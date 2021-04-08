@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { LoginForm } from "./component";
-const loginFormContainer = () => {
-  return <LoginForm />;
+
+const LoginFormContainer = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
+
+  return (
+    <LoginForm
+      showPassword={showPassword}
+      handleClickShowPassword={handleClickShowPassword}
+    />
+  );
 };
-export default loginFormContainer;
+export default LoginFormContainer;
