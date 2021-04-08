@@ -1,13 +1,31 @@
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 type loginProps = {
   showPassword: boolean;
   handleClickShowPassword: () => void;
 };
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
+
 export const LoginForm = (props: loginProps) => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
-    <div className="mt-8">
-      <form action="#" autoComplete="off">
+    <div className="mt-4">
+      <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col mb-2">
           <div className="flex relative ">
             <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -27,10 +45,21 @@ export const LoginForm = (props: loginProps) => {
               </svg>
             </span>
             <input
-              type="text"
-              className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              id="email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              className={`rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2  ${
+                formik.errors.email ? "border border-red-500" : ""
+              } focus:ring-green-600 focus:border-transparent`}
               placeholder="Your email"
             />
+          </div>
+          <div className="flex justify-center items-center">
+            {formik.touched.email && formik.errors.email ? (
+              <p className="text-red-600 text-xs mt-2">{formik.errors.email}</p>
+            ) : null}
           </div>
         </div>
         <div className="flex flex-col mb-6">
@@ -53,6 +82,7 @@ export const LoginForm = (props: loginProps) => {
             </span>
             <span className="absolute inset-y-0 right-1 flex items-center pl-2">
               <button
+                type="button"
                 onClick={props.handleClickShowPassword}
                 className="p-1 focus:outline-none focus:shadow-outline"
               >
@@ -100,10 +130,23 @@ export const LoginForm = (props: loginProps) => {
               </button>
             </span>
             <input
+              id="password"
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
               type={props.showPassword ? "text" : "password"}
-              className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              className={`rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent ${
+                formik.errors.password ? "border border-red-500" : ""
+              }`}
               placeholder="Your password"
             />
+          </div>
+          <div className="flex justify-center items-center">
+            {formik.touched.password && formik.errors.password ? (
+              <p className="text-red-600 text-xs mt-2">
+                {formik.errors.password}
+              </p>
+            ) : null}
           </div>
         </div>
         <div className="flex w-full">
@@ -116,12 +159,16 @@ export const LoginForm = (props: loginProps) => {
         </div>
       </form>
       <div className="flex items-center justify-center mt-6">
-        <Link
-          to="/signup"
-          className="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white"
-        >
-          <span className="ml-2">You don&#x27;t have an account?</span>
-        </Link>
+        <span className="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
+          Don't have an account?
+          <Link
+            to="/signup"
+            target="_blank"
+            className="text-sm text-green-500 underline hover:text-green-600 ml-1"
+          >
+            Sign up
+          </Link>
+        </span>
       </div>
     </div>
   );
