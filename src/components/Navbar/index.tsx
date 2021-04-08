@@ -51,13 +51,6 @@ const Navbar = () => {
         </div>
         <div className="hidden w-full md:inline-flex  md:w-auto">
           <div className="md:inline-flex md:flex-row md:ml-auto md:w-auto w-full md:items-center items-start  flex flex-col md:h-auto">
-            {/* <NavLink
-              to="/profile"
-              activeClassName="bg-green-600"
-              className="md:inline-flex md:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-green-600 hover:text-white"
-            >
-              Profile
-            </NavLink> */}
             <div className="mr-8 flex md:ml-6 relative">
               <div>
                 <button
