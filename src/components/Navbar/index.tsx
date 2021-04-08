@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="invisible md:visible font-body flex items-center flex-wrap bg-green-400 p-2 text-white">
+      <nav className="hidden md:flex font-body items-center flex-wrap bg-green-400 p-2 text-white">
         <NavLink
           exact
           to="/"
@@ -24,7 +24,7 @@ const Navbar = () => {
             Haerlems Studenten Gildt
           </span>
         </NavLink>
-        <div className="hidden w-full md:inline-flex md: md:mx-auto md:w-auto">
+        <div className="hidden md:inline-flex space-x-4 md:mx-auto md:w-auto">
           <div className="md:inline-flex md:flex-row md:ml-auto md:w-auto w-full md:items-center items-start  flex flex-col md:h-auto">
             <NavLink
               to="/reserve"
@@ -157,7 +157,7 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        <nav className="visible md:invisible w-full fixed bottom-0 inset-x-0 bg-green-400 flex justify-between text-xs text-white uppercase font-body">
+        <nav className="flex md:hidden w-full fixed bottom-0 inset-x-0 bg-green-400 justify-between text-xs text-white uppercase font-body">
           <NavLink
             to="/"
             className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
