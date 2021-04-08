@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="relative min-h-screen bg-gray-100">
       <Navbar />
       <Switch>
         <Route path="/login" component={Login} />

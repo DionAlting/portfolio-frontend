@@ -157,7 +157,7 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        <nav className="flex md:hidden w-full fixed bottom-0 inset-x-0 bg-green-400 justify-between text-xs text-white uppercase font-body">
+        <nav className="flex md:hidden w-full absolute bottom-0 inset-x-0 bg-green-400 justify-between text-xs text-white uppercase font-body">
           <NavLink
             to="/"
             className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
@@ -243,7 +243,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             onClick={() => setMenuOpen(!menuOpen)}
-            to="/"
+            to="#"
             className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
             <svg
