@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-type loginProps = {
-  showPassword: boolean;
-  handleClickShowPassword: () => void;
-};
+import { loginProps } from "./types";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -21,6 +17,7 @@ export const LoginForm = (props: loginProps) => {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       console.log(values);
+      props.handleSubmit(values);
     },
   });
   return (

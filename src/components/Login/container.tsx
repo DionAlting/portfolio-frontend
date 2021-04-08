@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { User } from "../../redux";
 import { Login } from "./component";
-const loginContainer = () => {
-  return <Login />;
+
+const LoginContainer = () => {
+  const isAuthenticated = useSelector(User.Selectors.isAuthenticated);
+  return <Login isAuthenticated={isAuthenticated} />;
 };
-export default loginContainer;
+export default LoginContainer;

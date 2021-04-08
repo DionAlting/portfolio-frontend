@@ -1,7 +1,13 @@
+import React from "react";
+import { Redirect } from "react-router-dom";
+
 import { LoginForm } from "./LoginForm";
 import Logo from "../../assets/Logo_no_margin.svg";
 
-export const Login = () => {
+import { loginUIProps } from "./types";
+
+export const Login = (props: loginUIProps) => {
+  if (props.isAuthenticated) return <Redirect to="/" />;
   return (
     <div className="flex flex-col w-full max-w-md mt-10 px-4 py-8 bg-white border-t-2 border-green-400 rounded-lg shadow-xl sm:px-6 md:px-8 lg:px-10">
       <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl">
