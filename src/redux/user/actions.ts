@@ -44,6 +44,36 @@ export const login = (email: string, password: string) => async (
   }
 };
 
+export const signUp = (
+  displayName: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string
+) => async (dispatch: Dispatch) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup`, {
+      displayName,
+      email,
+      firstName,
+      lastName,
+      password,
+    });
+    const { token } = response.data;
+
+    const userProfile = await getUserProfile(token);
+
+    localStorage.setItem("jwt", token);
+    dispatch(saveUserData(token, userProfile));
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data.message);
+    } else {
+      console.log(error.message);
+    }
+  }
+};
+
 export const bootstrapLogin = () => async (dispatch: Dispatch) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
