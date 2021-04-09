@@ -54,7 +54,7 @@ export const SignUpForm = () => {
           </div>
           <div className="flex">
             {formik.touched.displayName && formik.errors.displayName ? (
-              <p className="text-red-600 text-xs mt-2">
+              <p className="mt-2 text-xs text-red-600">
                 {formik.errors.displayName}
               </p>
             ) : null}
@@ -75,7 +75,7 @@ export const SignUpForm = () => {
             />
             <div className="flex flex-col">
               {formik.touched.firstName && formik.errors.firstName ? (
-                <p className="text-red-600 text-xs mt-2">
+                <p className="mt-2 text-xs text-red-600">
                   {formik.errors.firstName}
                 </p>
               ) : null}
@@ -96,7 +96,7 @@ export const SignUpForm = () => {
             />
             <div className="flex flex-col">
               {formik.touched.lastName && formik.errors.lastName ? (
-                <p className="text-red-600 text-xs mt-2">
+                <p className="mt-2 text-xs text-red-600">
                   {formik.errors.lastName}
                 </p>
               ) : null}
@@ -119,7 +119,7 @@ export const SignUpForm = () => {
           </div>
           <div className="flex flex-col">
             {formik.touched.email && formik.errors.email ? (
-              <p className="text-red-600 text-xs mt-2">{formik.errors.email}</p>
+              <p className="mt-2 text-xs text-red-600">{formik.errors.email}</p>
             ) : null}
           </div>
         </div>
@@ -139,7 +139,7 @@ export const SignUpForm = () => {
           </div>
           <div className="flex flex-col">
             {formik.touched.password && formik.errors.password ? (
-              <p className="text-red-600 text-xs mt-2">
+              <p className="mt-2 text-xs text-red-600">
                 {formik.errors.password}
               </p>
             ) : null}
@@ -161,7 +161,7 @@ export const SignUpForm = () => {
           </div>
           <div className="flex flex-col">
             {formik.touched.passwordConfirm && formik.errors.passwordConfirm ? (
-              <p className="text-red-600 text-xs mt-2">
+              <p className="mt-2 text-xs text-red-600">
                 {formik.errors.passwordConfirm}
               </p>
             ) : null}
@@ -170,7 +170,7 @@ export const SignUpForm = () => {
         <div className="flex w-full my-4">
           <button
             type="submit"
-            className="py-2 px-4  bg-green-400 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+            className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
           >
             Sign up
           </button>
@@ -181,7 +181,7 @@ export const SignUpForm = () => {
           Already have an account?
           <Link
             to="/login"
-            className="text-sm text-green-500 underline hover:text-green-600 ml-1"
+            className="ml-1 text-sm text-green-500 underline hover:text-green-600"
           >
             Login
           </Link>
