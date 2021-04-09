@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { LOGIN_SUCCESS } from "../actionTypes";
+import { LOGIN_SUCCESS, LOG_OUT } from "../actionTypes";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -23,6 +23,7 @@ const getUserProfile = async (token: string) => {
     console.log(e);
   }
 };
+export const logOut = () => ({ type: LOG_OUT });
 
 export const login = (email: string, password: string) => async (
   dispatch: Dispatch

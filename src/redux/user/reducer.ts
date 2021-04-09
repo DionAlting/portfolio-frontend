@@ -3,7 +3,7 @@ import { LOGIN_SUCCESS, LOG_OUT, TOKEN_STILL_VALID } from "../actionTypes";
 
 const initialState: UserState = {
   isAuthenticated: false,
-  user: null,
+  user: {},
   accessToken: localStorage.getItem("token"),
 };
 
@@ -14,12 +14,12 @@ export default function authReducer(state = initialState, action: UserAction) {
       localStorage.setItem("token", token);
       return {
         isAuthenticated: true,
-        user,
+        ...user,
         accessToken: token,
       };
     case LOG_OUT:
       localStorage.removeItem("token");
-      return { ...initialState, token: null };
+      return { ...initialState };
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };

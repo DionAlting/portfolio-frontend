@@ -1,9 +1,20 @@
 import React, { useState, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
-import Logo from "../../assets/Logo_no_margin.svg";
+
 import useOutsideClick from "../../hooks/useOutsideClick";
 
-export const Navbar = () => {
+import { NavbarProps } from "./types";
+
+import Logo from "../../assets/Logo_no_margin.svg";
+import {
+  HomeIcon,
+  TicketIcon,
+  MusicNoteIcon,
+  BadgeCheckIcon,
+  UserCircleIcon,
+} from "@heroicons/react/outline";
+
+export const Navbar = (props: NavbarProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -53,23 +64,36 @@ export const Navbar = () => {
         <div className="hidden w-full md:inline-flex  md:w-auto">
           <div className="md:inline-flex md:flex-row md:ml-auto md:w-auto w-full md:items-center items-start  flex flex-col md:h-auto">
             <div className="mr-8 flex md:ml-6 relative">
-              <div>
-                <button
-                  type="button"
-                  className="max-w-xs rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-green-600"
-                  id="user-menu"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-10 w-10 rounded-full border-2 border-white"
-                    src="https://thecodingsnail.dev/img/profile-image-light.jpeg"
-                    alt=""
-                  />
-                </button>
-              </div>
+              {props.isAuthenticated ? (
+                <div>
+                  <button
+                    type="button"
+                    className="max-w-xs rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-green-600"
+                    id="user-menu"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
+                    <span className="sr-only">Open user menu</span>
+                    <img
+                      className="h-10 w-10 rounded-full border-2 border-white"
+                      src={props.avatar}
+                      alt=""
+                    />
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <NavLink
+                    to="/login"
+                    activeClassName="bg-green-600"
+                    className="md:inline-flex md:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-green-600 hover:text-white"
+                  >
+                    Login
+                  </NavLink>
+                </div>
+              )}
+
               {menuOpen && (
                 <div
                   ref={menuRef}
@@ -98,13 +122,12 @@ export const Navbar = () => {
                     Settings
                   </Link>
 
-                  <Link
-                    to="/signout"
+                  <span
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
+                    onClick={props.handleLogout}
                   >
                     Sign out
-                  </Link>
+                  </span>
                 </div>
               )}
             </div>
@@ -112,71 +135,85 @@ export const Navbar = () => {
         </div>
       </nav>
       <div className="">
-        {menuOpen && (
-          <div
-            ref={menuRef}
-            className="md:hidden fixed xs:bottom-12 xs:pb-5 bottom-20 mb-2 pt-4 pb-3 w-full border-t border-green-600 bg-green-200 "
-          >
-            <div className="flex items-center px-5">
-              <div className="flex-shrink-0">
-                <img
-                  className="h-10 w-10 rounded-full border-2 border-white"
-                  src="https://thecodingsnail.dev/img/profile-image-light.jpeg"
-                  alt=""
-                />
+        {menuOpen &&
+          (props.isAuthenticated ? (
+            <div
+              ref={menuRef}
+              className="md:hidden fixed xs:bottom-12 xs:pb-5 bottom-20 mb-2 pt-4 pb-3 w-full border-t border-green-600 bg-green-200 "
+            >
+              <div className="flex items-center px-5">
+                <div className="flex-shrink-0">
+                  <img
+                    className="h-10 w-10 rounded-full border-2 border-white"
+                    src={props.avatar}
+                    alt={props.displayName}
+                  />
+                </div>
+                <div className="ml-3">
+                  <div className="text-base mb-1 font-medium leading-none text-white">
+                    Hi! {props.fullName}
+                  </div>
+                  <div className="text-sm font-medium leading-none text-gray-600">
+                    {props.email}
+                  </div>
+                </div>
               </div>
-              <div className="ml-3">
-                <div className="text-base mb-1 font-medium leading-none text-white">
-                  Dion Alting
-                </div>
-                <div className="text-sm font-medium leading-none text-gray-400">
-                  dion@test.com
-                </div>
+              <div className="mt-3 px-2 space-y-1 text-green-700">
+                <Link
+                  to="#"
+                  className="block px-3 py-2 rounded-md text-base font-medium  hover:bg-green-600 hover:text-white"
+                >
+                  Your Profile
+                </Link>
+
+                <Link
+                  to="#"
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                >
+                  Settings
+                </Link>
+
+                <Link
+                  to="#"
+                  onClick={props.handleLogout}
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                >
+                  Sign out
+                </Link>
               </div>
             </div>
-            <div className="mt-3 px-2 space-y-1 text-green-700">
-              <Link
-                to="#"
-                className="block px-3 py-2 rounded-md text-base font-medium  hover:bg-green-600 hover:text-white"
-              >
-                Your Profile
-              </Link>
-
-              <Link
-                to="#"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
-              >
-                Settings
-              </Link>
-
-              <Link
-                to="#"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
-              >
-                Sign out
-              </Link>
+          ) : (
+            <div
+              ref={menuRef}
+              className="md:hidden fixed xs:bottom-12 xs:pb-5 bottom-20 mb-2 pt-4 pb-3 w-full border-t border-green-600 bg-green-200 "
+            >
+              <div className="flex items-center px-5">
+                <div className="ml-3">
+                  <div className="text-base mb-1 font-medium leading-none text-white">
+                    Hi! Login below to view your account
+                  </div>
+                  <div className="text-sm font-medium leading-none text-gray-600">
+                    {props.email}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 px-2 space-y-1 text-green-700">
+                <NavLink
+                  to="/login"
+                  activeClassName="text-white bg-green-600"
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                >
+                  Login
+                </NavLink>
+              </div>
             </div>
-          </div>
-        )}
+          ))}
         <nav className="flex md:hidden w-full fixed z-10 bottom-0 inset-x-0 bg-green-400 justify-between text-xs text-white uppercase font-body">
           <NavLink
             to="/"
             className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
-            <svg
-              className="w-6 h-6 mb-2 mx-auto"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
+            <HomeIcon className="w-6 h-6 mb-2 mx-auto" />
             <span className="xs:hidden">Home</span>
           </NavLink>
 
@@ -184,20 +221,7 @@ export const Navbar = () => {
             to="/"
             className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
-            <svg
-              className="w-6 h-6 mb-2 mx-auto"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-              />
-            </svg>
+            <TicketIcon className="w-6 h-6 mb-2 mx-auto" />
             <span className="xs:hidden">Reserve</span>
           </NavLink>
 
@@ -205,20 +229,7 @@ export const Navbar = () => {
             to="/"
             className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
-            <svg
-              className="w-6 h-6 mb-2 mx-auto"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-              />
-            </svg>
+            <MusicNoteIcon className="w-6 h-6 mb-2 mx-auto" />
             <span className="xs:hidden">Jukebox </span>
           </NavLink>
 
@@ -226,20 +237,7 @@ export const Navbar = () => {
             to="/"
             className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
-            <svg
-              className="w-6 h-6 mb-2 mx-auto"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-              />
-            </svg>
+            <BadgeCheckIcon className="w-6 h-6 mb-2 mx-auto" />
             <span className="xs:hidden">Stamps</span>
           </NavLink>
           <NavLink
@@ -247,20 +245,7 @@ export const Navbar = () => {
             to="#"
             className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
           >
-            <svg
-              className="w-6 h-6 mb-2 mx-auto"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <UserCircleIcon className="w-6 h-6 mb-2 mx-auto" />
             <span className="xs:hidden">Profile</span>
           </NavLink>
         </nav>
