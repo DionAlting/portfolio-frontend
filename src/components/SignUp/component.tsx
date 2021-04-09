@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import Logo from "../../assets/Logo_no_margin.svg";
+import { SignUpForm } from "./SignUpForm/component";
 
 import { SignUpUIProps } from "./types";
 
@@ -17,6 +18,7 @@ export const SignUp = (props: SignUpUIProps) => {
       <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl">
         Create A New Account
       </div>
+      <SignUpForm />
     </div>
   );
 };
