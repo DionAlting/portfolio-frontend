@@ -160,7 +160,6 @@ export const LoginForm = (props: loginProps) => {
           Don't have an account?
           <Link
             to="/signup"
-            target="_blank"
             className="text-sm text-green-500 underline hover:text-green-600 ml-1"
           >
             Sign up
