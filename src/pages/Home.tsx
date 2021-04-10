@@ -1,4 +1,5 @@
 import React from "react";
+import { AvailableSeatsCard } from "../components/AvailableSeatsCard";
 
 const Home = () => {
   return (
@@ -12,10 +13,8 @@ const Home = () => {
           hammock starladder roathse. Craies vegan tousled etsy austin.
         </p>
       </div>
-      <div className="flex flex-col w-full p-8 mt-10 bg-white rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-        <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">
-          TODO: Available seats component
-        </h2>
+      <div className="flex flex-col w-full p-8 mt-10 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+        <AvailableSeatsCard />
       </div>
     </div>
   );
