@@ -11,7 +11,7 @@ export const datesFetchedSuccess = (data: ReservationDatePayload) => ({
 });
 
 export const fetchDates = () => async (dispatch: Dispatch) => {
-  const dateResponse = await axios.get(`${API_URL}/reserve`);
+  const dateResponse = await axios.get(`${API_URL}/reserve/dates`);
 
   dispatch(datesFetchedSuccess(dateResponse.data));
 };
