@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AvailableSeatsCard } from "../components/AvailableSeatsCard";
 
 const Home = () => {
@@ -12,8 +13,16 @@ const Home = () => {
           Poke slow-carb mixtape knausgaard, typewriter street art gentrify
           hammock starladder roathse. Craies vegan tousled etsy austin.
         </p>
+        <div className="mt-5">
+          <button
+            className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear bg-green-500 rounded shadow outline-none active:bg-emerald-600 hover:shadow-lg focus:outline-none"
+            type="button"
+          >
+            <Link to="/reserve">Reserve now</Link>
+          </button>
+        </div>
       </div>
-      <div className="flex flex-col w-full p-8 mt-10 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+      <div className="flex flex-col w-full mt-10 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
         <AvailableSeatsCard />
       </div>
     </div>
