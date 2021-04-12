@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
 });
 
 const ErrorMessage = ({ name }: any) => (
-  <Field className="mt-2 text-xs text-red-600" name={name}>
+  <Field name={name}>
     {({ form }: FieldProps) => {
       const error = getIn(form.errors, name);
       const touch = getIn(form.touched, name);
@@ -31,9 +31,8 @@ const ErrorMessage = ({ name }: any) => (
 );
 
 export const ReserveForm = (props: ReserveFormProps) => {
-  console.log(props.allDates);
   return (
-    <div className="w-full mt-4">
+    <div className="w-full">
       {props.isAuthenticated ? (
         <Formik
           initialValues={{
@@ -47,7 +46,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
             comment: "",
           }}
           validationSchema={schema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => props.handleReservationSubmit(values)}
         >
           {({ values, errors, isSubmitting }) => (
             <Form>
@@ -156,7 +155,6 @@ export const ReserveForm = (props: ReserveFormProps) => {
                           </div>
                         </div>
                       ))}
-                    {console.log("Form errors", errors)}
                     {props.singleDate && (
                       <>
                         <div className="relative md:pr-10">
@@ -176,7 +174,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
                         </div>
                         <div>
                           <button
-                            className="px-4 py-2 my-4 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                            className="px-4 py-2 my-4 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed "
                             type="submit"
                             disabled={isSubmitting}
                           >
@@ -193,7 +191,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
         </Formik>
       ) : (
         <div className="bg-white dark:bg-gray-800 ">
-          <div className="z-20 w-full px-4 py-12 mx-auto lg:flex lg:items-center lg:justify-between sm:px-6 lg:py-16 lg:px-8">
+          <div className="z-20 w-full px-4 py-6 mx-auto lg:flex lg:items-center lg:justify-between sm:px-6 lg:py-16 lg:px-8">
             <h2 className="font-extrabold text-gray-700 text-1xl dark:text-white sm:text-3xl">
               <span className="block">Reserve a seat?</span>
               <span className="block text-xl text-green-500">
@@ -204,7 +202,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
               <div className="inline-flex rounded-md shadow ">
                 <button
                   type="button"
-                  className="w-full px-6 py-2 mt-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  className="w-full px-6 py-2 mt-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 rounded-lg shadow-md hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                 >
                   <Link to="/login"> Login</Link>
                 </button>
