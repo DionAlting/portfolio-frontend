@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ReservationDates } from "../../redux";
+import { Reserve } from "../../redux";
 import { AvailableSeatsCard } from "./component";
 
 const AvailableSeatsCardContainer = () => {
   const dispatch = useDispatch();
+  const allDates = useSelector(Reserve.Selectors.reservationDates);
 
   useEffect(() => {
-    dispatch(ReservationDates.Actions.fetchDates());
+    dispatch(Reserve.Actions.fetchDates());
   }, [dispatch]);
-  const allDates = useSelector(ReservationDates.Selectors.reservationDates);
+
   return (
     <div>
       <AvailableSeatsCard allDates={allDates} />

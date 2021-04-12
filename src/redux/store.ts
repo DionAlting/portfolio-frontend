@@ -2,11 +2,11 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import ReduxThunk from "redux-thunk";
 
 import userReducer from "./user/reducer";
-import reservationDatesReducer from "./reservationDates/reducer";
+import reserveReducer from "./reserve/reducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  reservationDates: reservationDatesReducer,
+  reserve: reserveReducer,
 });
 
 const devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__
