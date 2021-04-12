@@ -194,9 +194,9 @@ export const ReserveForm = (props: ReserveFormProps) => {
       ) : (
         <div className="bg-white dark:bg-gray-800 ">
           <div className="z-20 w-full px-4 py-12 mx-auto lg:flex lg:items-center lg:justify-between sm:px-6 lg:py-16 lg:px-8">
-            <h2 className="text-2xl font-extrabold text-gray-700 dark:text-white sm:text-4xl">
+            <h2 className="font-extrabold text-gray-700 text-1xl dark:text-white sm:text-3xl">
               <span className="block">Reserve a seat?</span>
-              <span className="block text-green-500">
+              <span className="block text-xl text-green-500">
                 Login or Sign up now!
               </span>
             </h2>

@@ -1,7 +1,7 @@
 export type ReserveFormProps = {
   allDates: Date[];
   handleDateChange: (id: string) => void;
-  singleDate: Date;
+  singleDate: Date | undefined;
   isAuthenticated: boolean;
   firstName: string;
   lastName: string;

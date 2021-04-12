@@ -1,14 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
-import { ReservationDates, User } from "../../../redux";
+import { Reserve, User } from "../../../redux";
 import { ReserveForm } from "./component";
 
 const ReserveFormContainer = () => {
   const [selectedDate, setSelectedDate] = useState("");
-  const allDates = useSelector(ReservationDates.Selectors.reservationDates);
-  const singleDate = useSelector(
-    ReservationDates.Selectors.singleDate(selectedDate)
-  );
+  const allDates = useSelector(Reserve.Selectors.reservationDates);
+  const singleDate = useSelector(Reserve.Selectors.singleDate(selectedDate));
   const { isAuthenticated, firstName, lastName } = useSelector(
     User.Selectors.user
   );
