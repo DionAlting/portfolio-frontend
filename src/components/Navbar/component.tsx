@@ -24,51 +24,51 @@ export const Navbar = (props: NavbarProps) => {
 
   return (
     <>
-      <nav className="hidden md:flex font-body items-center flex-wrap bg-green-400 p-2 text-white">
+      <nav className="flex-wrap items-center hidden p-2 text-white bg-green-400 md:flex font-body">
         <NavLink
           exact
           to="/"
-          className="inline-flex items-center p-2 mr-4 hover:bg-green-600 hover:text-white transition duration-300"
+          className="inline-flex items-center p-2 mr-4 transition duration-300 hover:bg-green-600 hover:text-white"
         >
-          <img src={Logo} alt="HSG Logo" className="h-10 w-10 mr-2" />
+          <img src={Logo} alt="HSG Logo" className="w-10 h-10 mr-2" />
 
-          <span className="text-xl text-white md:text-sm font-bold uppercase tracking-wide">
+          <span className="text-xl font-bold tracking-wide text-white uppercase md:text-sm">
             Haerlems Studenten Gildt
           </span>
         </NavLink>
-        <div className="hidden md:inline-flex space-x-4 md:mx-auto md:w-auto">
-          <div className="md:inline-flex md:flex-row md:ml-auto md:w-auto w-full md:items-center items-start  flex flex-col md:h-auto">
+        <div className="hidden space-x-4 md:inline-flex md:mx-auto md:w-auto">
+          <div className="flex flex-col items-start w-full md:inline-flex md:flex-row md:ml-auto md:w-auto md:items-center md:h-auto">
             <NavLink
               to="/reserve"
               activeClassName="bg-green-600"
-              className="md:inline-flex md:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-green-600 hover:text-white"
+              className="items-center justify-center w-full px-3 py-2 font-bold rounded md:inline-flex md:w-auto hover:bg-green-600 hover:text-white"
             >
               Reserve
             </NavLink>
             <NavLink
               to="/jukebox"
               activeClassName="bg-green-600"
-              className="md:inline-flex md:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-green-600 hover:text-white"
+              className="items-center justify-center w-full px-3 py-2 font-bold text-white rounded md:inline-flex md:w-auto hover:bg-green-600 hover:text-white"
             >
               Jukebox
             </NavLink>
             <NavLink
               to="/stampcard"
               activeClassName="bg-green-600"
-              className="md:inline-flex md:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-green-600 hover:text-white"
+              className="items-center justify-center w-full px-3 py-2 font-bold text-white rounded md:inline-flex md:w-auto hover:bg-green-600 hover:text-white"
             >
               Stampcard
             </NavLink>
           </div>
         </div>
-        <div className="hidden w-full md:inline-flex  md:w-auto">
-          <div className="md:inline-flex md:flex-row md:ml-auto md:w-auto w-full md:items-center items-start  flex flex-col md:h-auto">
-            <div className="mr-8 flex md:ml-6 relative">
+        <div className="hidden w-full md:inline-flex md:w-auto">
+          <div className="flex flex-col items-start w-full md:inline-flex md:flex-row md:ml-auto md:w-auto md:items-center md:h-auto">
+            <div className="relative flex mr-8 md:ml-6">
               {props.isAuthenticated ? (
                 <div>
                   <button
                     type="button"
-                    className="max-w-xs rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-green-600"
+                    className="flex items-center max-w-xs text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-green-600"
                     id="user-menu"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -76,7 +76,7 @@ export const Navbar = (props: NavbarProps) => {
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="h-10 w-10 rounded-full border-2 border-white"
+                      className="w-10 h-10 border-2 border-white rounded-full"
                       src={props.avatar}
                       alt=""
                     />
@@ -87,7 +87,7 @@ export const Navbar = (props: NavbarProps) => {
                   <NavLink
                     to="/login"
                     activeClassName="bg-green-600"
-                    className="md:inline-flex md:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-green-600 hover:text-white"
+                    className="items-center justify-center w-full px-3 py-2 font-bold text-white rounded md:inline-flex md:w-auto hover:bg-green-600 hover:text-white"
                   >
                     Login
                   </NavLink>
@@ -139,18 +139,18 @@ export const Navbar = (props: NavbarProps) => {
           (props.isAuthenticated ? (
             <div
               ref={menuRef}
-              className="md:hidden fixed xs:bottom-12 xs:pb-5 bottom-20 mb-2 pt-4 pb-3 w-full border-t border-green-600 bg-green-200 "
+              className="fixed w-full pt-4 pb-3 mb-2 bg-green-200 border-t border-green-600 md:hidden xs:bottom-12 xs:pb-5 bottom-20 "
             >
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <img
-                    className="h-10 w-10 rounded-full border-2 border-white"
+                    className="w-10 h-10 border-2 border-white rounded-full"
                     src={props.avatar}
                     alt={props.displayName}
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base mb-1 font-medium leading-none text-white">
+                  <div className="mb-1 text-base font-medium leading-none text-white">
                     Hi! {props.fullName}
                   </div>
                   <div className="text-sm font-medium leading-none text-gray-600">
@@ -158,17 +158,17 @@ export const Navbar = (props: NavbarProps) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-3 px-2 space-y-1 text-green-700">
+              <div className="px-2 mt-3 space-y-1 text-green-700">
                 <Link
-                  to="#"
-                  className="block px-3 py-2 rounded-md text-base font-medium  hover:bg-green-600 hover:text-white"
+                  to="/profile"
+                  className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
                 >
                   Your Profile
                 </Link>
 
                 <Link
                   to="#"
-                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                  className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
                 >
                   Settings
                 </Link>
@@ -176,7 +176,7 @@ export const Navbar = (props: NavbarProps) => {
                 <Link
                   to="#"
                   onClick={props.handleLogout}
-                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                  className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
                 >
                   Sign out
                 </Link>
@@ -185,11 +185,11 @@ export const Navbar = (props: NavbarProps) => {
           ) : (
             <div
               ref={menuRef}
-              className="md:hidden fixed xs:bottom-12 xs:pb-5 bottom-20 mb-2 pt-4 pb-3 w-full border-t border-green-600 bg-green-200 "
+              className="fixed w-full pt-4 pb-3 mb-2 bg-green-200 border-t border-green-600 md:hidden xs:bottom-12 xs:pb-5 bottom-20 "
             >
               <div className="flex items-center px-5">
                 <div className="ml-3">
-                  <div className="text-base mb-1 font-medium leading-none text-white">
+                  <div className="mb-1 text-base font-medium leading-none text-white">
                     Hi! Login below to view your account
                   </div>
                   <div className="text-sm font-medium leading-none text-gray-600">
@@ -197,55 +197,55 @@ export const Navbar = (props: NavbarProps) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-3 px-2 space-y-1 text-green-700">
+              <div className="px-2 mt-3 space-y-1 text-green-700">
                 <NavLink
                   to="/login"
                   activeClassName="text-white bg-green-600"
-                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-600 hover:text-white"
+                  className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
                 >
                   Login
                 </NavLink>
               </div>
             </div>
           ))}
-        <nav className="flex md:hidden w-full fixed z-10 bottom-0 inset-x-0 bg-green-400 justify-between text-xs text-white uppercase font-body">
+        <nav className="fixed inset-x-0 bottom-0 z-10 flex justify-between w-full text-xs text-white uppercase bg-green-400 md:hidden font-body">
           <NavLink
             to="/"
-            className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
+            className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
-            <HomeIcon className="w-6 h-6 mb-2 mx-auto" />
+            <HomeIcon className="w-6 h-6 mx-auto mb-2" />
             <span className="xs:hidden">Home</span>
           </NavLink>
 
           <NavLink
-            to="/"
-            className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
+            to="/reserve"
+            className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
-            <TicketIcon className="w-6 h-6 mb-2 mx-auto" />
+            <TicketIcon className="w-6 h-6 mx-auto mb-2" />
             <span className="xs:hidden">Reserve</span>
           </NavLink>
 
           <NavLink
-            to="/"
-            className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
+            to="/jukebox"
+            className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
-            <MusicNoteIcon className="w-6 h-6 mb-2 mx-auto" />
+            <MusicNoteIcon className="w-6 h-6 mx-auto mb-2" />
             <span className="xs:hidden">Jukebox </span>
           </NavLink>
 
           <NavLink
-            to="/"
-            className="w-full block py-5 px-3 text-center  hover:bg-green-200 hover:text-green-800 transition duration-300"
+            to="/stamps"
+            className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
-            <BadgeCheckIcon className="w-6 h-6 mb-2 mx-auto" />
+            <BadgeCheckIcon className="w-6 h-6 mx-auto mb-2" />
             <span className="xs:hidden">Stamps</span>
           </NavLink>
           <NavLink
             onClick={() => setMenuOpen(!menuOpen)}
             to="#"
-            className="w-full block py-5 px-3 text-center hover:bg-green-200 hover:text-green-800 transition duration-300"
+            className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
-            <UserCircleIcon className="w-6 h-6 mb-2 mx-auto" />
+            <UserCircleIcon className="w-6 h-6 mx-auto mb-2" />
             <span className="xs:hidden">Profile</span>
           </NavLink>
         </nav>
