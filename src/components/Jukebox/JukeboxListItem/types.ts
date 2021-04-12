@@ -3,8 +3,13 @@ export type JukeboxListItemProps = {
   isAuthenticated: boolean;
   isAdmin: boolean;
 };
-export type Votes = {
-  userId: string;
+
+export type Props = {
+  songDetails: any;
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+  handleUpvoteClick: (songId: string) => void;
+  handleDownvoteClick: (songId: string) => void;
 };
 
 export type Song = {
@@ -14,4 +19,8 @@ export type Song = {
   title: string;
   voteCount: number;
   votes: Votes[];
+};
+
+export type Votes = {
+  userId: string;
 };
