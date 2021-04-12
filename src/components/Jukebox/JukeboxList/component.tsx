@@ -1,12 +1,21 @@
 import React from "react";
 import { JukeboxListItem } from "../JukeboxListItem";
+import { JukeboxListProps } from "./types";
 
-export const JukeboxList = () => {
+export const JukeboxList = (props: JukeboxListProps) => {
   return (
-    <div>
-      <ul className="flex flex-col items-center ">
-        <JukeboxListItem />
-      </ul>
+    <div className="mt-4">
+      {props.allRequestedSongs && (
+        <ul className="flex flex-col items-center ">
+          {props.allRequestedSongs.map((song) => (
+            <JukeboxListItem
+              songDetails={song}
+              isAdmin={props.isAdmin}
+              isAuthenticated={props.isAuthenticated}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
