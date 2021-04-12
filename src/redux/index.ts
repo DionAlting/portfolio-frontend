@@ -1,3 +1,3 @@
 import * as User from "./user";
-import * as ReservationDates from "./reservationDates";
-export { User, ReservationDates };
+import * as Reserve from "./reserve";
+export { User, Reserve };

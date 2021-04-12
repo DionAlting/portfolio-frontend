@@ -1,7 +1,7 @@
 import { FETCH_DATES_SUCCESS } from "../actionTypes";
 
 export type ReservationDatesState = {
-  reservationDates: any;
+  reservationDates: ReservationDatePayload[];
 };
 
 export type ReservationDatesAction = {
