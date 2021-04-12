@@ -5,12 +5,11 @@ import {
   TrashIcon,
 } from "@heroicons/react/outline";
 
-import { JukeboxListItemProps } from "./types";
+import { Props } from "./types";
 
-export const JukeboxListItem = (props: JukeboxListItemProps) => {
-  console.log(props.songDetails);
+export const JukeboxListItem = (props: Props) => {
   const { id, artist, title, voteCount } = props.songDetails;
-  console.log(props.isAuthenticated);
+
   return (
     <li
       key={id}
@@ -24,7 +23,8 @@ export const JukeboxListItem = (props: JukeboxListItemProps) => {
         <div className="flex flex-row flex-shrink space-x-4">
           <button
             className="flex text-right disabled:opacity-40 disabled:cursor-not-allowed"
-            disabled={!props.isAuthenticated}
+            disabled={!props.isAuthenticated || voteCount <= 0}
+            onClick={() => props.handleDownvoteClick(id)}
           >
             <ArrowDownIcon className="w-5 h-5 text-red-400 hover:text-red-700" />
           </button>
@@ -32,7 +32,7 @@ export const JukeboxListItem = (props: JukeboxListItemProps) => {
           <button
             className="flex disabled:opacity-40 disabled:cursor-not-allowed"
             disabled={!props.isAuthenticated}
-            onClick={() => console.log("clicked")}
+            onClick={() => props.handleUpvoteClick(id)}
           >
             <ArrowUpIcon className="w-5 h-5 text-green-400 hover:text-green-700" />
           </button>
