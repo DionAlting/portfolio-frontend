@@ -1,6 +1,7 @@
 import {
   DOWNVOTE_SONG_SUCCESS,
   FETCH_SONGS_SUCCESS,
+  REQUEST_SONG_SUCCESS,
   UPVOTE_SONG_SUCCESS,
 } from "../actionTypes";
 
@@ -42,6 +43,11 @@ export default function jukeboxReducer(state = initialState, action: any) {
       return {
         ...state,
         requestedSongs: downvotedSong,
+      };
+    case REQUEST_SONG_SUCCESS:
+      return {
+        ...state,
+        requestedSongs: [...state.requestedSongs, action.payload],
       };
 
     default:

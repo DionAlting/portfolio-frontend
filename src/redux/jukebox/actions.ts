@@ -3,10 +3,12 @@ import { Dispatch } from "redux";
 import {
   DOWNVOTE_SONG_SUCCESS,
   FETCH_SONGS_SUCCESS,
+  REQUEST_SONG_SUCCESS,
   UPVOTE_SONG_SUCCESS,
 } from "../actionTypes";
 import { ReduxState } from "../store";
-import { SongsPayload } from "./types";
+import { requestedSongs } from "./selectors";
+import { SongRequestValues, SongsPayload } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -23,6 +25,11 @@ export const upvoteSongSuccess = (songId: string) => ({
 export const downSongSuccess = (songId: string) => ({
   type: DOWNVOTE_SONG_SUCCESS,
   payload: songId,
+});
+
+export const submitRequestSuccess = (data: SongsPayload) => ({
+  type: REQUEST_SONG_SUCCESS,
+  payload: data,
 });
 
 export const fetchSongRequests = () => async (dispatch: Dispatch) => {
@@ -71,6 +78,30 @@ export const downvoteSongRequest = (songId: string) => async (
       }
     );
     dispatch(downSongSuccess(songId));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const submitSongRequest = (values: SongRequestValues) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { artist, title } = values;
+    const { accessToken } = getState().user;
+    const requestResponse = await axios.post(
+      `${API_URL}/jukebox/requests`,
+      {
+        artist,
+        title,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    console.log(requestResponse);
+    dispatch(submitRequestSuccess(requestResponse.data.newSongRequest));
   } catch (error) {
     console.log(error);
   }

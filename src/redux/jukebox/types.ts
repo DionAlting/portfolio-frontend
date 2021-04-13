@@ -21,3 +21,8 @@ export type SongsPayload = {
 export type Votes = {
   userId: string;
 };
+
+export type SongRequestValues = {
+  artist: string;
+  title: string;
+};
