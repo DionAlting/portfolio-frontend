@@ -2,10 +2,11 @@ import React from "react";
 import { Formik, Form, Field, getIn, FieldProps } from "formik";
 
 import * as Yup from "yup";
+import { RequestFormProps } from "./types";
 
 const schema = Yup.object().shape({
-  artist: Yup.string().required("Required"),
-  title: Yup.string().required("Required"),
+  artist: Yup.string().max(30, "Max 30 characters").required("Required"),
+  title: Yup.string().max(30, "Max 30 characters").required("Required"),
 });
 
 const ErrorMessage = ({ name }: any) => (
@@ -18,7 +19,7 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const RequestForm = () => {
+export const RequestForm = (props: RequestFormProps) => {
   return (
     <div className="mt-10">
       <Formik
@@ -28,7 +29,7 @@ export const RequestForm = () => {
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          console.log(values);
+          props.handleRequestSubmit(values);
           actions.setSubmitting(false);
           actions.resetForm();
         }}
