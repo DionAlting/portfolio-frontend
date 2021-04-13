@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import {
+  DELETE_SONG_SUCCESS,
   DOWNVOTE_SONG_SUCCESS,
   FETCH_SONGS_SUCCESS,
   REQUEST_SONG_SUCCESS,
@@ -30,6 +31,11 @@ export const downSongSuccess = (songId: string) => ({
 export const submitRequestSuccess = (data: SongsPayload) => ({
   type: REQUEST_SONG_SUCCESS,
   payload: data,
+});
+
+export const deleteSongSuccess = (songId: string) => ({
+  type: DELETE_SONG_SUCCESS,
+  payload: songId,
 });
 
 export const fetchSongRequests = () => async (dispatch: Dispatch) => {
@@ -102,6 +108,24 @@ export const submitSongRequest = (values: SongRequestValues) => async (
     );
     console.log(requestResponse);
     dispatch(submitRequestSuccess(requestResponse.data.newSongRequest));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteSongRequest = (songId: string) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    const requestResponse = await axios.delete(
+      `${API_URL}/jukebox/requests/${songId}`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    dispatch(deleteSongSuccess(songId));
   } catch (error) {
     console.log(error);
   }
