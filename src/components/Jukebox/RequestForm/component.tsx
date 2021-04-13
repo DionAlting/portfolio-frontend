@@ -84,15 +84,17 @@ export const RequestForm = (props: RequestFormProps) => {
         </Formik>
       ) : (
         <div>
-          <h2 className="font-extrabold text-gray-700 text-1xl dark:text-white sm:text-3xl">
-            <span className="block text-xl">Request a song?</span>
-            <span className="block text-green-500">Login or Sign up now!</span>
+          <h2 className="font-extrabold text-gray-700 text-1xl dark:text-white">
+            <span className="block text-2xl md:text-3xl">Request a song?</span>
+            <span className="block text-base text-green-500 md:text-1xl">
+              Login or Sign up now!
+            </span>
           </h2>
           <div className="mt-4 lg:mt-4 lg:flex-shrink-0">
             <div className="inline-flex rounded-md shadow ">
               <button
                 type="button"
-                className="w-full px-6 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 rounded-lg shadow-md hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                className="w-full px-6 py-2 text-xs font-semibold text-center text-white transition duration-200 ease-in bg-green-500 rounded-lg shadow-md md:text-base hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
               >
                 <Link to="/login"> Login</Link>
               </button>
@@ -100,7 +102,7 @@ export const RequestForm = (props: RequestFormProps) => {
             <div className="inline-flex ml-3 rounded-md shadow">
               <button
                 type="button"
-                className="w-full px-6 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-gray-600 rounded-lg shadow-md hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                className="w-full px-6 py-2 text-xs font-semibold text-center text-white transition duration-200 ease-in bg-gray-600 rounded-lg shadow-md md:text-base hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
               >
                 <Link to="/signup"> Sign up</Link>
               </button>
