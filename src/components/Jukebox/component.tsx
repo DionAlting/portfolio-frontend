@@ -1,5 +1,6 @@
 import React from "react";
 import { JukeboxList } from "./JukeboxList";
+import { RequestForm } from "./RequestForm";
 
 export const Jukebox = () => {
   return (
@@ -11,6 +12,7 @@ export const Jukebox = () => {
         <p className="max-w-2xl mt-1 text-sm text-gray-500 ">
           Request a song or vote on other requested songs!
         </p>
+        <RequestForm />
       </div>
       <JukeboxList />
     </div>
