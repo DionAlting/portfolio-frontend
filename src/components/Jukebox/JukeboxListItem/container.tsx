@@ -16,6 +16,11 @@ const JukeboxListItemContainer = (props: JukeboxListItemProps) => {
     dispatch(Jukebox.Actions.downvoteSongRequest(songId));
   };
 
+  const handleRemoveClick = (songId: string) => {
+    // dispatch(Jukebox.Actions.)
+    dispatch(Jukebox.Actions.deleteSongRequest(songId));
+  };
+
   return (
     <JukeboxListItem
       songDetails={props.songDetails}
@@ -23,6 +28,7 @@ const JukeboxListItemContainer = (props: JukeboxListItemProps) => {
       isAuthenticated={props.isAuthenticated}
       handleUpvoteClick={handleUpvoteClick}
       handleDownvoteClick={handleDownvoteClick}
+      handleRemoveClick={handleRemoveClick}
     />
   );
 };

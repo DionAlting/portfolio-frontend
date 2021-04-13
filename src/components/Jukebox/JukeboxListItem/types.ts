@@ -10,6 +10,7 @@ export type Props = {
   isAdmin: boolean;
   handleUpvoteClick: (songId: string) => void;
   handleDownvoteClick: (songId: string) => void;
+  handleRemoveClick: (songId: string) => void;
 };
 
 export type Song = {

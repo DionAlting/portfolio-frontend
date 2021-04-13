@@ -39,7 +39,10 @@ export const JukeboxListItem = (props: Props) => {
         </div>
         {props.isAdmin && (
           <div className="flex justify-end ml-2 md:w-10">
-            <button className="flex">
+            <button
+              className="flex"
+              onClick={() => props.handleRemoveClick(id)}
+            >
               <TrashIcon className="w-5 h-5 text-red-400 hover:text-red-700" />
             </button>
           </div>
