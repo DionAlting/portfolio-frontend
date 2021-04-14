@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Reserve from "./pages/Reserve";
 import SignUp from "./pages/SignUp";
+import Stamp from "./pages/Stamp";
 import { User } from "./redux";
 import AuthRoute from "./util/AuthRoute";
 
@@ -25,6 +26,7 @@ function App() {
           path="/profile"
           component={Profile}
         />
+        <Route path="/stampcard" component={Stamp} />
         <Route path="/jukebox" component={Jukebox} />
         <Route path="/reserve" component={Reserve} />
         <Route path="/login" component={Login} />
