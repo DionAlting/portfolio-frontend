@@ -5,7 +5,7 @@ import { StudyAssocPayload } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const fetchStudyAssocSuccess = (data: StudyAssocPayload[]) => {
+const fetchStudyAssocSuccess = (data: StudyAssocPayload) => {
   return {
     type: FETCH_STUDY_ASSOC_SUCCESS,
     payload: data,
