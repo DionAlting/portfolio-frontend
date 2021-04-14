@@ -1,7 +1,13 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { LOGIN_SUCCESS, LOG_OUT, UPDATE_PROFILE_SUCCESS } from "../actionTypes";
+import {
+  GET_STAMPS_SUCCESS,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+  UPDATE_PROFILE_SUCCESS,
+} from "../actionTypes";
 import { ReduxState } from "../store";
+import { Stamp } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -33,8 +39,15 @@ export const updateProfileSuccess = (data: any) => {
   };
 };
 
+export const getStampsSuccess = (stamps: Stamp) => {
+  return {
+    type: GET_STAMPS_SUCCESS,
+    payload: stamps,
+  };
+};
+
 export const login = (email: string, password: string) => async (
-  dispatch: Dispatch
+  dispatch: Dispatch<any>
 ) => {
   try {
     const response = await axios.post(`${API_URL}/login`, {
@@ -47,6 +60,7 @@ export const login = (email: string, password: string) => async (
 
     localStorage.setItem("jwt", token);
     dispatch(saveUserData(token, userProfile));
+    dispatch(getUserStamps());
   } catch (e) {
     console.log("error", e);
   }
@@ -131,6 +145,22 @@ export const changePassword = (values: any) => async (
       }
     );
     console.log(changePasswordResponse);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserStamps = () => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken, id } = getState().user;
+    const stampsResponse = await axios.get(`${API_URL}/user/${id}/stamps`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    console.log(stampsResponse);
+    dispatch(getStampsSuccess(stampsResponse.data.stamps));
   } catch (error) {
     console.log(error);
   }
