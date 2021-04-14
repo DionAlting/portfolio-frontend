@@ -114,3 +114,24 @@ export const updateProfile = (values: any) => async (
     console.log(error);
   }
 };
+
+export const changePassword = (values: any) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken, id } = getState().user;
+    const changePasswordResponse = await axios.patch(
+      `${API_URL}/user/${id}/changepassword`,
+      {
+        values,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    console.log(changePasswordResponse);
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -36,7 +36,7 @@ export const ChangePasswordForm = (props: ChangePasswordProps) => {
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          console.log(values);
+          props.handleChangePasswordSubmit(values);
           actions.setSubmitting(false);
           actions.resetForm();
         }}
