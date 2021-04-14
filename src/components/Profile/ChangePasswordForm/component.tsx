@@ -1,7 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, getIn, FieldProps } from "formik";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 
 import * as Yup from "yup";
+import { ChangePasswordProps } from "./types";
 
 const schema = Yup.object().shape({
   password: Yup.string()
@@ -23,7 +25,7 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const ChangePasswordForm = () => {
+export const ChangePasswordForm = (props: ChangePasswordProps) => {
   return (
     <div>
       <Formik
@@ -48,11 +50,24 @@ export const ChangePasswordForm = () => {
                 <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                   <div>
                     <div className="relative ">
+                      <span className="absolute inset-y-0 flex items-center pl-2 right-1">
+                        <button
+                          type="button"
+                          onClick={props.handleClickShowPassword}
+                          className="p-1 focus:outline-none focus:shadow-outline"
+                        >
+                          {props.showPassword ? (
+                            <EyeIcon className="w-4 h-4 text-gray-500" />
+                          ) : (
+                            <EyeOffIcon className="w-4 h-4 text-gray-500" />
+                          )}
+                        </button>
+                      </span>
                       <Field
                         className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
                         name="password"
                         placeholder="New Password"
-                        type="password"
+                        type={props.showPassword ? "text" : "password"}
                       />
                       <div className="flex flex-col">
                         <span className="pl-2 mt-2 text-xs text-red-600">
@@ -61,19 +76,18 @@ export const ChangePasswordForm = () => {
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="relative ">
-                      <Field
-                        className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
-                        name="passwordConfirm"
-                        placeholder="Confirm Password"
-                        type="password"
-                      />
-                      <div className="flex flex-col">
-                        <span className="pl-2 mt-2 text-xs text-red-600">
-                          <ErrorMessage name="passwordConfirm" />
-                        </span>
-                      </div>
+
+                  <div className="relative ">
+                    <Field
+                      className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
+                      name="passwordConfirm"
+                      placeholder="Confirm Password"
+                      type={props.showPassword ? "text" : "password"}
+                    />
+                    <div className="flex flex-col">
+                      <span className="pl-2 mt-2 text-xs text-red-600">
+                        <ErrorMessage name="passwordConfirm" />
+                      </span>
                     </div>
                   </div>
                 </div>
