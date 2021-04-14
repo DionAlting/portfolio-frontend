@@ -1,4 +1,5 @@
 import React from "react";
+import { ChangePasswordForm } from "./ChangePasswordForm";
 import { EditProfileForm } from "./EditProfileForm";
 
 export const Profile = () => {
@@ -12,6 +13,7 @@ export const Profile = () => {
           Edit your profile
         </p>
         <EditProfileForm />
+        <ChangePasswordForm />
       </div>
     </div>
   );
