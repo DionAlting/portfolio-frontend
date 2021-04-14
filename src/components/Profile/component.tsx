@@ -1,4 +1,5 @@
 import React from "react";
+import { EditProfileForm } from "./EditProfileForm";
 
 export const Profile = () => {
   return (
@@ -10,6 +11,7 @@ export const Profile = () => {
         <p className="max-w-2xl mt-1 text-sm text-gray-500 ">
           Edit your profile
         </p>
+        <EditProfileForm />
       </div>
     </div>
   );
