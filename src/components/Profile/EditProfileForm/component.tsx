@@ -128,7 +128,25 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
                   </div>
                   <div>
                     <div className="relative ">
-                      <select name="studyAssoc" id="studyAssoc"></select>
+                      <Field
+                        as="select"
+                        name="studyAssociation"
+                        className="block w-full px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
+                      >
+                        <option value="" selected disabled>
+                          {props.user.studyAssociation.name}
+                        </option>
+                        {props.studyAssociations.map((studyAssoc) => (
+                          <option value={studyAssoc.id} selected>
+                            {studyAssoc.name}
+                          </option>
+                        ))}
+                      </Field>
+                      <div className="flex flex-col">
+                        <span className="pl-2 mt-2 text-xs text-red-600">
+                          <ErrorMessage name="studyAssociation" />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
