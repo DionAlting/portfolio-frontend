@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -9,13 +10,22 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Reserve from "./pages/Reserve";
 import SignUp from "./pages/SignUp";
+import { User } from "./redux";
+import AuthRoute from "./util/AuthRoute";
 
 function App() {
+  const isAuthenticated = useSelector(User.Selectors.isAuthenticated);
+  console.log(isAuthenticated);
   return (
     <div className="relative min-h-screen pb-40 bg-gray-100 md:pb-10">
       <Navbar />
       <Switch>
-        <Route path="/profile" component={Profile} />
+        <AuthRoute
+          isAuthenticated={isAuthenticated}
+          authenticationPath="/login"
+          path="/profile"
+          component={Profile}
+        />
         <Route path="/jukebox" component={Jukebox} />
         <Route path="/reserve" component={Reserve} />
         <Route path="/login" component={Login} />
