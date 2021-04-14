@@ -1,5 +1,10 @@
 import { UserAction, UserState } from "./types";
-import { LOGIN_SUCCESS, LOG_OUT, TOKEN_STILL_VALID } from "../actionTypes";
+import {
+  LOGIN_SUCCESS,
+  LOG_OUT,
+  TOKEN_STILL_VALID,
+  UPDATE_PROFILE_SUCCESS,
+} from "../actionTypes";
 
 const initialState: UserState = {
   isAuthenticated: false,
@@ -24,6 +29,11 @@ export default function authReducer(state = initialState, action: UserAction) {
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
 
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

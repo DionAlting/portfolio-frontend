@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { LOGIN_SUCCESS, LOG_OUT } from "../actionTypes";
+import { LOGIN_SUCCESS, LOG_OUT, UPDATE_PROFILE_SUCCESS } from "../actionTypes";
+import { ReduxState } from "../store";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -24,6 +25,13 @@ const getUserProfile = async (token: string) => {
   }
 };
 export const logOut = () => ({ type: LOG_OUT });
+
+export const updateProfileSuccess = (data: any) => {
+  return {
+    type: UPDATE_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
 
 export const login = (email: string, password: string) => async (
   dispatch: Dispatch
@@ -82,5 +90,27 @@ export const bootstrapLogin = () => async (dispatch: Dispatch) => {
     dispatch(saveUserData(jwt, userProfile));
   } else {
     console.log("no token stored in localstorage");
+  }
+};
+
+export const updateProfile = (values: any) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken, id } = getState().user;
+    const updateResponse = await axios.patch(
+      `${API_URL}/user/${id}`,
+      {
+        values,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    const data = updateResponse.data.cleanUpdatedUser;
+    dispatch(updateProfileSuccess(data));
+  } catch (error) {
+    console.log(error);
   }
 };
