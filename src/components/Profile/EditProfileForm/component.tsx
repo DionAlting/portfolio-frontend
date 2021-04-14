@@ -8,7 +8,7 @@ const schema = Yup.object().shape({
   email: Yup.string().required("Required"),
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
-  studyAssociation: Yup.string().required("Required"),
+  studyAssociationId: Yup.string().required("Required"),
 });
 
 const ErrorMessage = ({ name }: any) => (
@@ -25,40 +25,23 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
   return (
     <div>
       <Formik
+        enableReinitialize
         initialValues={{
           displayName: props.user.displayName || "",
           email: props.user.email || "",
           firstName: props.user.firstName || "",
           lastName: props.user.lastName || "",
-          studyAssociation: props.user.studyAssociation.name || "",
+          studyAssociationId: props.user.studyAssociation.id || "",
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          console.log(values);
+          props.handleUpdateProfileSubmit(values);
           actions.setSubmitting(false);
           actions.resetForm();
         }}
       >
         {({ isSubmitting }) => (
-          <Form className="max-w-2xl mx-auto mt-5 md:w-full">
-            <div className="p-4">
-              <div className="max-w-sm mx-auto md:w-full md:mx-0">
-                <div className="inline-flex items-center space-x-4">
-                  <img
-                    alt="profil"
-                    src="https://i.pravatar.cc/300"
-                    className="object-cover w-16 h-16 mx-auto rounded-full "
-                  />
-
-                  <button
-                    type="submit"
-                    className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
-                  >
-                    Change
-                  </button>
-                </div>
-              </div>
-            </div>
+          <Form className="z-0 max-w-2xl mx-auto mt-5 md:w-full">
             <div className="space-y-6">
               <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
                 <h2 className="max-w-sm mx-auto md:w-1/3">Account</h2>
@@ -66,7 +49,7 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
                   <div>
                     <div className="relative ">
                       <Field
-                        className={`rounded-lg disabled:cursor-not-allowed flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
+                        className={`rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
                         name={`displayName`}
                         placeholder="Username"
                         disabled
@@ -130,21 +113,23 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
                     <div className="relative ">
                       <Field
                         as="select"
-                        name="studyAssociation"
+                        name="studyAssociationId"
                         className="block w-full px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
                       >
-                        <option value="" selected disabled>
-                          {props.user.studyAssociation.name}
-                        </option>
                         {props.studyAssociations.map((studyAssoc) => (
-                          <option value={studyAssoc.id} selected>
+                          <option
+                            value={studyAssoc.id}
+                            disabled={
+                              studyAssoc.id === props.user.studyAssociation.id
+                            }
+                          >
                             {studyAssoc.name}
                           </option>
                         ))}
                       </Field>
                       <div className="flex flex-col">
                         <span className="pl-2 mt-2 text-xs text-red-600">
-                          <ErrorMessage name="studyAssociation" />
+                          <ErrorMessage name="studyAssociationId" />
                         </span>
                       </div>
                     </div>

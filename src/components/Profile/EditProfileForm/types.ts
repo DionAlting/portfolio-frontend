@@ -18,7 +18,7 @@ export type User = {
   lastName: string;
   displayName: string;
   avatar: string;
-  studyAssociation: { name: string };
+  studyAssociation: { name: string; id: string };
 };
 
 export type UpdateProfileValues = {

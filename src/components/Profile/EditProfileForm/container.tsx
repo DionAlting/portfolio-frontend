@@ -14,7 +14,7 @@ const EditProfileFormContainer = () => {
   }, [dispatch]);
 
   const handleUpdateProfileSubmit = (values: UpdateProfileValues) => {
-    console.log(values);
+    dispatch(User.Actions.updateProfile(values));
   };
 
   return (
