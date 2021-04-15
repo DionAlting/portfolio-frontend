@@ -34,7 +34,7 @@ export const Events = (props: EventProps) => {
                   {event.creator.studyAssociation.name}
                 </span>
                 <div className="flex flex-row items-center justify-between py-2 mr-1">
-                  <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
+                  <p className="mt-4 mb-2 text-xl font-medium text-gray-800 dark:text-white">
                     {event.title}
                   </p>
                   <img
