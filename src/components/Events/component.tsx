@@ -47,17 +47,17 @@ export const Events = (props: EventProps) => {
                   <p className="text-gray-800 dark:text-white">
                     {moment(event.eventDate).fromNow()}
                   </p>
-                  <p className="text-gray-400 dark:text-gray-300">
+                  <p className="text-gray-400 dark:text-gray-500">
                     From {moment(event.startTime).format("LT")} till{" "}
                     {moment(event.endTime).format("LT")}
                   </p>
                 </div>
 
-                <p className="font-light text-gray-400 dark:text-gray-300 text-md">
+                <p className="font-light text-gray-700 dark:text-gray-300 text-md">
                   {event.content}
                 </p>
                 <div className="flex items-center mt-4">
-                  <p className="flex items-center text-sm text-gray-300 flex-2">
+                  <p className="flex items-center text-sm text-gray-500 flex-2">
                     <CheckCircleIcon className="w-6 h-6 mr-1 text-green-500" />{" "}
                     {event.attendees.length} Attendees
                   </p>
