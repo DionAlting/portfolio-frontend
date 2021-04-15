@@ -1,7 +1,7 @@
-import { FETCH_RESERVATION_DATES_SUCCESS } from "../actionTypes";
+import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
 
 export type BackOfficeState = {
-  reservationDates: ReservationDatesPayload[];
+  reservationsByDate: ReservationDatesPayload[];
 };
 
 export type ReservationDatesPayload = {
@@ -32,6 +32,6 @@ export type Reservations = {
 };
 
 export type BackOfficeAction = {
-  type: typeof FETCH_RESERVATION_DATES_SUCCESS;
+  type: typeof FETCH_RESERVATION_BY_DATE_SUCCESS;
   payload: ReservationDatesPayload;
 };
