@@ -3,14 +3,14 @@ import { EventAction, EventState } from "./types";
 
 const initialState: EventState = [];
 
-export default function studyAssocReducer(
+export default function eventReducer(
   state = initialState,
   action: EventAction
 ) {
   switch (action.type) {
     case FETCH_EVENTS_SUCCESS:
-      const { events } = action.payload;
-      return [...events];
+      const { allEvents } = action.payload;
+      return [...allEvents];
     default:
       return state;
   }
