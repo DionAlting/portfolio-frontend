@@ -1,4 +1,5 @@
 import React from "react";
+import { ReservationTable } from "./ReservationTable/";
 
 export const BackOffice = () => {
   return (
@@ -13,7 +14,7 @@ export const BackOffice = () => {
           <p>Add new date form</p>
         </div>
         <div>
-          <p>Reservations table</p>
+          <ReservationTable />
         </div>
       </div>
     </div>
