@@ -1,10 +1,17 @@
 import { UserAction, UserState } from "./types";
-import { LOGIN_SUCCESS, LOG_OUT, TOKEN_STILL_VALID } from "../actionTypes";
+import {
+  GET_STAMPS_SUCCESS,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+  TOKEN_STILL_VALID,
+  UPDATE_PROFILE_SUCCESS,
+} from "../actionTypes";
 
 const initialState: UserState = {
   isAuthenticated: false,
   user: {},
   accessToken: localStorage.getItem("token"),
+  stamps: [],
 };
 
 export default function authReducer(state = initialState, action: UserAction) {
@@ -17,12 +24,25 @@ export default function authReducer(state = initialState, action: UserAction) {
         ...user,
         accessToken: token,
       };
+
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState };
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
+
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case GET_STAMPS_SUCCESS:
+      return {
+        ...state,
+        stamps: [...action.payload],
+      };
 
     default:
       return state;
