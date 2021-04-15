@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { toast } from "react-toastify";
 import {
   GET_STAMPS_SUCCESS,
   LOGIN_SUCCESS,
@@ -54,6 +55,7 @@ export const login = (email: string, password: string) => async (
       email,
       password,
     });
+
     const { token } = response.data;
 
     const userProfile = await getUserProfile(token);
@@ -61,8 +63,13 @@ export const login = (email: string, password: string) => async (
     localStorage.setItem("jwt", token);
     dispatch(saveUserData(token, userProfile));
     dispatch(getUserStamps());
-  } catch (e) {
-    console.log("error", e);
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log("error", error);
   }
 };
 
@@ -89,10 +96,11 @@ export const signUp = (
     dispatch(saveUserData(token, userProfile));
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
     } else {
-      console.log(error.message);
+      toast.error("Something unexpected happened");
     }
+    console.log("error", error);
   }
 };
 
@@ -100,7 +108,6 @@ export const bootstrapLogin = () => async (dispatch: Dispatch) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
     const userProfile = await getUserProfile(jwt);
-    console.log("user profile loaded automatically", userProfile);
     dispatch(saveUserData(jwt, userProfile));
   } else {
     console.log("no token stored in localstorage");
@@ -125,7 +132,12 @@ export const updateProfile = (values: any) => async (
     const data = updateResponse.data.cleanUpdatedUser;
     dispatch(updateProfileSuccess(data));
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log("error", error);
   }
 };
 
@@ -144,9 +156,14 @@ export const changePassword = (values: any) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(changePasswordResponse);
+    toast.success(changePasswordResponse.data.message);
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log("error", error);
   }
 };
 
@@ -159,9 +176,13 @@ export const getUserStamps = () => async (
     const stampsResponse = await axios.get(`${API_URL}/user/${id}/stamps`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    console.log(stampsResponse);
     dispatch(getStampsSuccess(stampsResponse.data.stamps));
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log("error", error);
   }
 };
