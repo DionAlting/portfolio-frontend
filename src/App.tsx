@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 import { User } from "./redux";
 
 import { Route, Switch } from "react-router-dom";
 
 import { Navbar } from "./components/Navbar";
+import { useBootstrapLogin } from "./hooks/useBootstrapLogin";
 
 import BackOffice from "./pages/BackOffice/BackOffice";
 import Home from "./pages/Home";
@@ -19,10 +23,13 @@ import AuthRoute from "./util/AuthRoute";
 import AdminRoute from "./util/AdminRoute";
 
 function App() {
+  useBootstrapLogin();
+
   const { isAuthenticated, isAdmin } = useSelector(User.Selectors.user);
   return (
     <div className="relative min-h-screen mb-20 bg-gray-100 lg:mb-0">
       <Navbar />
+      <ToastContainer autoClose={2000} position="bottom-center" />
       <Switch>
         <AuthRoute
           isAuthenticated={isAuthenticated}
