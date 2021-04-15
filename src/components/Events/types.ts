@@ -1,0 +1,32 @@
+export type EventProps = {
+  events: Event[];
+};
+
+export type Event = {
+  id: string;
+  userId: string;
+  title: string;
+  content: string;
+  eventDate: string;
+  startTime: string;
+  endTime: string;
+  eventImage: string;
+  isStampable: boolean;
+  creator: Creator;
+  attendees: Attendees[];
+};
+
+export type Attendees = {
+  userId: string;
+};
+
+export type Creator = {
+  id: string;
+  studyAssociation: StudyAssoc;
+};
+
+export type StudyAssoc = {
+  id: string;
+  name: string;
+  color: string;
+};

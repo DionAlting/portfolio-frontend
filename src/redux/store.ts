@@ -5,12 +5,14 @@ import userReducer from "./user/reducer";
 import reserveReducer from "./reserve/reducer";
 import jukeboxReducer from "./jukebox/reducer";
 import studyAssocReducer from "./studyAssoc/reducer";
+import eventReducer from "./event/reducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
   reserve: reserveReducer,
   jukebox: jukeboxReducer,
   studyAssoc: studyAssocReducer,
+  events: eventReducer,
 });
 
 const devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__

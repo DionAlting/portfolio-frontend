@@ -17,7 +17,7 @@ import AuthRoute from "./util/AuthRoute";
 function App() {
   const isAuthenticated = useSelector(User.Selectors.isAuthenticated);
   return (
-    <div className="relative min-h-screen pb-40 bg-gray-100 md:pb-10">
+    <div className="relative min-h-screen mb-20 bg-gray-100 lg:mb-0">
       <Navbar />
       <Switch>
         <AuthRoute

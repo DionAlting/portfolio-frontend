@@ -4,7 +4,7 @@ import moment from "moment";
 
 export const AvailableSeatsCard = (props: AvailableSeatsProps) => {
   return (
-    <div className="relative p-4 overflow-hidden text-gray-700 bg-white border-t-2 border-green-400 shadow-lg rounded-xl md:w-72 dark:bg-gray-800 dark:text-gray-100">
+    <div className="p-4 overflow-hidden text-gray-700 bg-white border-t-2 border-green-400 shadow-lg rounded-xl dark:bg-gray-800 dark:text-gray-100">
       <div className="w-full">
         <p className="mb-4 text-2xl font-light text-gray-700 dark:text-white">
           Available Seats
