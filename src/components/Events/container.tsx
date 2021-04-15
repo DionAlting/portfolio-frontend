@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
-import { Event } from "../../redux";
-
+import { useEvents } from "./hooks";
 import { Events } from "./component";
 
 const EventsContainer = () => {
-  const dispatch = useDispatch();
-  const events = useSelector(Event.Selectors.events);
-
-  useEffect(() => {
-    dispatch(Event.Actions.fetchEvents());
-  }, [dispatch]);
+  const events = useEvents();
 
   return <Events events={events} />;
 };
