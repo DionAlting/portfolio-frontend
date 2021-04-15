@@ -4,7 +4,7 @@ import { ReserveForm } from "./ReserveForm/";
 
 export const Reserve = () => {
   return (
-    <div className="container flex flex-wrap items-center px-5 py-12 mx-auto md:py-24 font-body">
+    <div className="container flex flex-wrap items-center px-5 py-12 mx-auto md:py-20 font-body lg:w-2/3">
       <div className="w-full px-5 bg-white border-t-2 border-green-400 shadow-lg md:h-50 lg:w-3/5 md:w-3/5 md:pr-16 lg:pr-0 rounded-xl">
         <div className="py-3 mx-auto md:pr-4 ">
           <div
