@@ -1,3 +1,4 @@
 import * as eventReducer from "./reducer";
 import * as Actions from "./actions";
-export { Actions, eventReducer };
+import * as Selectors from "./selectors";
+export { Actions, eventReducer, Selectors };
