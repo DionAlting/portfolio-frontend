@@ -1,6 +1,6 @@
 import { FETCH_EVENTS_SUCCESS } from "../actionTypes";
 
-export type EventState = EventPayload[];
+export type EventState = Event[];
 
 export type EventPayload = {
   allEvents: Event[];
@@ -17,6 +17,11 @@ export type Event = {
   eventImage: string;
   isStampable: boolean;
   creator: Creator;
+  attendees: Attendees[];
+};
+
+export type Attendees = {
+  userId: string;
 };
 
 export type Creator = {
