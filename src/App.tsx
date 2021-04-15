@@ -16,9 +16,10 @@ import SignUp from "./pages/SignUp";
 import Stamp from "./pages/Stamp";
 
 import AuthRoute from "./util/AuthRoute";
+import AdminRoute from "./util/AdminRoute";
 
 function App() {
-  const isAuthenticated = useSelector(User.Selectors.isAuthenticated);
+  const { isAuthenticated, isAdmin } = useSelector(User.Selectors.user);
   return (
     <div className="relative min-h-screen mb-20 bg-gray-100 lg:mb-0">
       <Navbar />
@@ -29,7 +30,13 @@ function App() {
           path="/profile"
           component={Profile}
         />
-        <Route path="/backoffice" component={BackOffice} />
+        <AdminRoute
+          isAuthenticated={isAuthenticated}
+          isAdmin={isAdmin}
+          authenticationPath="/login"
+          path="/backoffice"
+          component={BackOffice}
+        />
         <Route path="/stampcard" component={Stamp} />
         <Route path="/jukebox" component={Jukebox} />
         <Route path="/reserve" component={Reserve} />
