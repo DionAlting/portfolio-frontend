@@ -1,2 +1,3 @@
 import * as eventReducer from "./reducer";
-export { eventReducer };
+import * as Actions from "./actions";
+export { Actions, eventReducer };

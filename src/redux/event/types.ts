@@ -3,7 +3,7 @@ import { FETCH_EVENTS_SUCCESS } from "../actionTypes";
 export type EventState = EventPayload[];
 
 export type EventPayload = {
-  events: Event[];
+  allEvents: Event[];
 };
 
 export type Event = {
