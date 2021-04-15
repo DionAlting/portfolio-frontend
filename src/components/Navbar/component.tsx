@@ -113,15 +113,17 @@ export const Navbar = (props: NavbarProps) => {
                   >
                     Your Profile
                   </Link>
+                  {props.isAuthenticated && props.isAdmin && (
+                    <Link
+                      to="/backoffice"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Back office
+                    </Link>
+                  )}
 
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Settings
-                  </Link>
-
+                  <hr />
                   <span
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={props.handleLogout}
@@ -139,7 +141,7 @@ export const Navbar = (props: NavbarProps) => {
           (props.isAuthenticated ? (
             <div
               ref={menuRef}
-              className="fixed w-full pt-4 pb-3 mb-2 bg-green-200 border-t border-green-600 md:hidden xs:bottom-12 xs:pb-5 bottom-20 "
+              className="fixed z-10 w-full pt-4 pb-3 mb-2 bg-green-200 border-t border-green-600 md:hidden xs:bottom-12 xs:pb-5 bottom-20 "
             >
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
@@ -165,16 +167,16 @@ export const Navbar = (props: NavbarProps) => {
                 >
                   Your Profile
                 </Link>
-
+                {props.isAdmin && (
+                  <Link
+                    to="/backoffice"
+                    className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
+                  >
+                    Back office
+                  </Link>
+                )}
                 <Link
-                  to="#"
-                  className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
-                >
-                  Settings
-                </Link>
-
-                <Link
-                  to="#"
+                  to="/"
                   onClick={props.handleLogout}
                   className="block px-3 py-2 text-base font-medium rounded-md hover:bg-green-600 hover:text-white"
                 >
@@ -234,7 +236,7 @@ export const Navbar = (props: NavbarProps) => {
           </NavLink>
 
           <NavLink
-            to="/stamps"
+            to="/stampcard"
             className="block w-full px-3 py-5 text-center transition duration-300 hover:bg-green-200 hover:text-green-800"
           >
             <BadgeCheckIcon className="w-6 h-6 mx-auto mb-2" />
