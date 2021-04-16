@@ -7,49 +7,54 @@ export const ReservationTable = ({ reservations }: ReservationTableProps) => {
   return (
     <div className="w-full">
       {reservations.map((date) => (
-        <div className="py-4 mx-auto overflow-x-auto ">
+        <div className="py-4 mx-auto overflow-x-auto " key={date.id}>
           <h2 className="px-4 py-2 text-xl leading-tight text-white bg-green-400 rounded-t-lg">
             {moment(date.date).format("dddd do MMMM YYYY")}
           </h2>
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
             <table className="min-w-full leading-normal table-fixed">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="w-1/2 px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="w-1/2 px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Comment
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Coins
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Cancel
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Check out
-                  </th>
-                </tr>
-              </thead>
+              {date.reservations.length > 0 ? (
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="w-1/2 px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="w-1/2 px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
+                    >
+                      Comment
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
+                    >
+                      Coins
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
+                    >
+                      Cancel
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-sm font-normal text-center text-gray-800 uppercase bg-white border-b border-gray-200"
+                    >
+                      Check out
+                    </th>
+                  </tr>
+                </thead>
+              ) : (
+                <p className="px-4 py-2">No reservations for this day yet</p>
+              )}
+
               <tbody>
                 {date.reservations.map((item) => (
-                  <tr>
+                  <tr key={item.id}>
                     <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <p className="text-gray-900 whitespace-no-wrap">
                         {item.firstName} {item.lastName}
