@@ -61,7 +61,6 @@ export const login = (email: string, password: string) => async (
 
     localStorage.setItem("jwt", token);
     dispatch(saveUserData(token, userProfile));
-    dispatch(getUserStamps());
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
@@ -103,12 +102,12 @@ export const signUp = (
   }
 };
 
-export const bootstrapLogin = () => async (dispatch: Dispatch) => {
+export const bootstrapLogin = () => async (dispatch: Dispatch<any>) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
     const userProfile = await getUserProfile(jwt);
-    console.log("user profile loaded automatically", userProfile);
     dispatch(saveUserData(jwt, userProfile));
+    dispatch(getUserStamps());
   } else {
     console.log("no token stored in localstorage");
   }
@@ -131,6 +130,7 @@ export const updateProfile = (values: any) => async (
     );
     const data = updateResponse.data.cleanUpdatedUser;
     dispatch(updateProfileSuccess(data));
+    toast.success(updateResponse.data.message);
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);

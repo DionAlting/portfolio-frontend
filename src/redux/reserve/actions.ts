@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import { FETCH_DATES_SUCCESS } from "../actionTypes";
 import { ReduxState } from "../store";
@@ -24,7 +25,6 @@ export const submitNewReservation = (values: any) => async (
   try {
     const { accessToken } = getState().user;
     const { dateId, reservationDetails, comment } = values;
-    console.log(accessToken, values);
     const response = await axios.post(
       `${API_URL}/reserve/${values.dateId}`,
       { dateId, reservationDetails, comment },
@@ -32,8 +32,13 @@ export const submitNewReservation = (values: any) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(response);
+    toast.success(response.data.message);
   } catch (error) {
-    console.log(error.message);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
