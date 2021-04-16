@@ -6,6 +6,8 @@ import moment from "moment";
 export const ReservationTable = ({
   reservations,
   handleCheckoutClick,
+  handleIncrementCoinsClick,
+  handleDecrementCoinsClick,
 }: ReservationTableProps) => {
   return (
     <div className="w-full">
@@ -69,14 +71,18 @@ export const ReservationTable = ({
                       </p>
                     </td>
                     <td className="flex flex-row items-center justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200">
-                      <button>
+                      <button
+                        onClick={() => handleDecrementCoinsClick(item.id)}
+                      >
                         <MinusIcon className="w-4 h-4" />
                       </button>
 
                       <p className="text-gray-900 whitespace-no-wrap">
                         {item.coins}
                       </p>
-                      <button>
+                      <button
+                        onClick={() => handleIncrementCoinsClick(item.id)}
+                      >
                         <PlusIcon className="w-4 h-4" />
                       </button>
                     </td>

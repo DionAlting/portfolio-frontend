@@ -14,10 +14,22 @@ const ReservationTableContainer = () => {
     dispatch(BackOffice.Actions.checkOutGuest(reservationId));
   };
 
+  const handleIncrementCoinsClick = (reservationId: string) => {
+    console.log(reservationId);
+    dispatch(BackOffice.Actions.incrementCoins(reservationId));
+  };
+
+  const handleDecrementCoinsClick = (reservationId: string) => {
+    console.log(reservationId);
+    dispatch(BackOffice.Actions.decrementCoins(reservationId));
+  };
+
   return (
     <ReservationTable
       reservations={reservations}
       handleCheckoutClick={handleCheckoutClick}
+      handleIncrementCoinsClick={handleIncrementCoinsClick}
+      handleDecrementCoinsClick={handleDecrementCoinsClick}
     />
   );
 };
