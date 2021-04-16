@@ -73,3 +73,56 @@ export const checkOutGuest = (reservationId: string) => async (
     console.log(error);
   }
 };
+
+export const incrementCoins = (reservationId: string) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    const incrementResponse = await axios.put(
+      `${API_URL}/backoffice/${reservationId}/increment`,
+      {
+        reservationId,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    console.log(incrementResponse);
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log(error);
+  }
+};
+
+export const decrementCoins = (reservationId: string) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    const decrementResponse = await axios.put(
+      `${API_URL}/backoffice/${reservationId}/decrement`,
+      {
+        reservationId,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+
+    console.log(decrementResponse);
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log(error);
+  }
+};

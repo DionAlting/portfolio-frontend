@@ -1,4 +1,3 @@
-import { date } from "yup/lib/locale";
 import {
   CHECK_OUT_GUEST_SUCCESS,
   FETCH_RESERVATION_BY_DATE_SUCCESS,
