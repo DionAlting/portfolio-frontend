@@ -1,4 +1,7 @@
-import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
+import {
+  CHECK_OUT_GUEST_SUCCESS,
+  FETCH_RESERVATION_BY_DATE_SUCCESS,
+} from "../actionTypes";
 
 export type BackOfficeState = {
   reservationsByDate: ReservationDate[];
@@ -31,7 +34,12 @@ export type Reservations = {
   isCheckedOut: boolean;
 };
 
-export type BackOfficeAction = {
-  type: typeof FETCH_RESERVATION_BY_DATE_SUCCESS;
-  payload: ReservationDatesPayload;
-};
+export type BackOfficeAction =
+  | {
+      type: typeof FETCH_RESERVATION_BY_DATE_SUCCESS;
+      payload: ReservationDatesPayload;
+    }
+  | {
+      type: typeof CHECK_OUT_GUEST_SUCCESS;
+      payload: { reservationId: string };
+    };

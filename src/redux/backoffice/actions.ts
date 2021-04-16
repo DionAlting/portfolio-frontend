@@ -1,7 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Dispatch } from "redux";
-import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
+import {
+  CHECK_OUT_GUEST_SUCCESS,
+  FETCH_RESERVATION_BY_DATE_SUCCESS,
+} from "../actionTypes";
 import { ReduxState } from "../store";
 import { ReservationDatesPayload } from "./types";
 
@@ -11,6 +14,13 @@ const fetchReservationsSuccess = (data: ReservationDatesPayload) => {
   return {
     type: FETCH_RESERVATION_BY_DATE_SUCCESS,
     payload: data,
+  };
+};
+
+const checkOutGuestSuccess = (reservationId: string) => {
+  return {
+    type: CHECK_OUT_GUEST_SUCCESS,
+    payload: reservationId,
   };
 };
 
@@ -26,8 +36,34 @@ export const fetchAllReservations = () => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(datesResponse.data);
     dispatch(fetchReservationsSuccess(datesResponse.data));
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log(error);
+  }
+};
+
+export const checkOutGuest = (reservationId: string) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    const checkOutResponse = await axios.put(
+      `${API_URL}/backoffice/${reservationId}/checkout`,
+      {
+        reservationId,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    dispatch(checkOutGuestSuccess(reservationId));
+    toast.success(checkOutResponse.data.message);
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);

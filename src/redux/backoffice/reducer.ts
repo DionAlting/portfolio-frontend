@@ -1,4 +1,8 @@
-import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
+import { date } from "yup/lib/locale";
+import {
+  CHECK_OUT_GUEST_SUCCESS,
+  FETCH_RESERVATION_BY_DATE_SUCCESS,
+} from "../actionTypes";
 import { BackOfficeAction, BackOfficeState } from "./types";
 
 const initialState: BackOfficeState = {
@@ -15,6 +19,10 @@ export default function backOfficeReducer(
       return {
         ...state,
         reservationsByDate: [...reservationDates],
+      };
+    case CHECK_OUT_GUEST_SUCCESS:
+      return {
+        ...state,
       };
     default:
       return state;
