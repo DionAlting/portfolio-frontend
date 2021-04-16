@@ -46,7 +46,10 @@ export const ReserveForm = (props: ReserveFormProps) => {
             comment: "",
           }}
           validationSchema={schema}
-          onSubmit={(values) => props.handleReservationSubmit(values)}
+          onSubmit={(values, actions) => {
+            props.handleReservationSubmit(values);
+            actions.setSubmitting(false);
+          }}
         >
           {({ values, errors, isSubmitting }) => (
             <Form>
