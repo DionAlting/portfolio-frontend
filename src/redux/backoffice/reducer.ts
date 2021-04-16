@@ -8,7 +8,7 @@ const initialState: BackOfficeState = {
 export default function backOfficeReducer(
   state = initialState,
   action: BackOfficeAction
-) {
+): BackOfficeState {
   switch (action.type) {
     case FETCH_RESERVATION_BY_DATE_SUCCESS:
       const { reservationDates } = action.payload;

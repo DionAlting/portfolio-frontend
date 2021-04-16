@@ -1,7 +1,7 @@
 import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
 
 export type BackOfficeState = {
-  reservationsByDate: ReservationDatesPayload[];
+  reservationsByDate: ReservationDate[];
 };
 
 export type ReservationDatesPayload = {
