@@ -3,7 +3,10 @@ import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
 import { ReservationTableProps } from "./types";
 import moment from "moment";
 
-export const ReservationTable = ({ reservations }: ReservationTableProps) => {
+export const ReservationTable = ({
+  reservations,
+  handleCheckoutClick,
+}: ReservationTableProps) => {
   return (
     <div className="w-full">
       {reservations.map((date) => (
@@ -90,7 +93,7 @@ export const ReservationTable = ({ reservations }: ReservationTableProps) => {
                     </td>
                     <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
                       <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900">
-                        <button>
+                        <button onClick={() => handleCheckoutClick(item.id)}>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0 bg-gray-400 rounded-full opacity-50"
