@@ -17,8 +17,8 @@ export const ReservationTable = ({
             {moment(date.date).format("dddd do MMMM YYYY")}
           </h2>
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
-            <table className="min-w-full leading-normal table-fixed">
-              {date.reservations.length > 0 ? (
+            {date.reservations.length > 0 ? (
+              <table className="min-w-full leading-normal table-fixed">
                 <thead>
                   <tr>
                     <th
@@ -53,65 +53,64 @@ export const ReservationTable = ({
                     </th>
                   </tr>
                 </thead>
-              ) : (
-                <p className="px-4 py-2">No reservations for this day yet</p>
-              )}
-
-              <tbody>
-                {date.reservations.map((item) => (
-                  <tr key={item.id}>
-                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {item.firstName} {item.lastName}
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {item.comment}
-                      </p>
-                    </td>
-                    <td className="flex flex-row items-center justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200">
-                      <button
-                        onClick={() => handleDecrementCoinsClick(item.id)}
-                      >
-                        <MinusIcon className="w-4 h-4" />
-                      </button>
-
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {item.coins}
-                      </p>
-                      <button
-                        onClick={() => handleIncrementCoinsClick(item.id)}
-                      >
-                        <PlusIcon className="w-4 h-4" />
-                      </button>
-                    </td>
-                    <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
-                      <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900">
-                        <button>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0 bg-red-200 rounded-full opacity-50"
-                          ></span>
-                          <span className="relative">Cancel</span>
+                <tbody>
+                  {date.reservations.map((item) => (
+                    <tr key={item.id}>
+                      <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                        <p className="text-gray-900 whitespace-no-wrap">
+                          {item.firstName} {item.lastName}
+                        </p>
+                      </td>
+                      <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                        <p className="text-gray-900 whitespace-no-wrap">
+                          {item.comment}
+                        </p>
+                      </td>
+                      <td className="flex flex-row items-center justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200">
+                        <button
+                          onClick={() => handleDecrementCoinsClick(item.id)}
+                        >
+                          <MinusIcon className="w-4 h-4" />
                         </button>
-                      </span>
-                    </td>
-                    <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
-                      <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900">
-                        <button onClick={() => handleCheckoutClick(item.id)}>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0 bg-gray-400 rounded-full opacity-50"
-                          ></span>
-                          <span className="relative">Checkout</span>
+
+                        <p className="text-gray-900 whitespace-no-wrap">
+                          {item.coins}
+                        </p>
+                        <button
+                          onClick={() => handleIncrementCoinsClick(item.id)}
+                        >
+                          <PlusIcon className="w-4 h-4" />
                         </button>
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                      <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
+                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900">
+                          <button>
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0 bg-red-200 rounded-full opacity-50"
+                            ></span>
+                            <span className="relative">Cancel</span>
+                          </button>
+                        </span>
+                      </td>
+                      <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
+                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900">
+                          <button onClick={() => handleCheckoutClick(item.id)}>
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0 bg-gray-400 rounded-full opacity-50"
+                            ></span>
+                            <span className="relative">Checkout</span>
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="p-4">No reservations for this day yet</p>
+            )}
           </div>
         </div>
       ))}
