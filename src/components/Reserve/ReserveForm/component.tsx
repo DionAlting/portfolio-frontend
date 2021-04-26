@@ -68,11 +68,12 @@ export const ReserveForm = (props: ReserveFormProps) => {
                           className="block px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-green-500 focus:border-green-500"
                           InputProps={props.handleDateChange(values.dateId)}
                         >
-                          <option value="" disabled selected>
+                          <option value="" disabled>
                             Select date
                           </option>
                           {props.allDates.map((date) => (
                             <option
+                              key={date.id}
                               value={date.id}
                               disabled={date.bookedSeats >= date.maxSeats}
                             >
