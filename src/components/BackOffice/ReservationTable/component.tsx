@@ -70,7 +70,7 @@ export const ReservationTable = ({
                         <button
                           onClick={() => handleDecrementCoinsClick(item.id)}
                         >
-                          <MinusIcon className="w-4 h-4" />
+                          <MinusIcon className="w-4 h-4 text-red-400" />
                         </button>
 
                         <p className="text-gray-900 whitespace-no-wrap">
@@ -79,11 +79,11 @@ export const ReservationTable = ({
                         <button
                           onClick={() => handleIncrementCoinsClick(item.id)}
                         >
-                          <PlusIcon className="w-4 h-4" />
+                          <PlusIcon className="w-4 h-4 text-green-400" />
                         </button>
                       </td>
                       <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
-                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900">
+                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900 hover:text-red-600">
                           <button>
                             <span
                               aria-hidden="true"
@@ -94,7 +94,7 @@ export const ReservationTable = ({
                         </span>
                       </td>
                       <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
-                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900">
+                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900 hover:text-gray-500">
                           <button onClick={() => handleCheckoutClick(item.id)}>
                             <span
                               aria-hidden="true"
