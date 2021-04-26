@@ -9,6 +9,7 @@ export const JukeboxList = (props: JukeboxListProps) => {
         <ul className="flex flex-col items-center ">
           {props.allRequestedSongs.map((song) => (
             <JukeboxListItem
+              key={song.id}
               songDetails={song}
               isAdmin={props.isAdmin}
               isAuthenticated={props.isAuthenticated}

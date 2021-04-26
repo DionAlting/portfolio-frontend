@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { AvailableSeatsProps, Date } from "./types";
 import moment from "moment";
 
@@ -11,7 +11,7 @@ export const AvailableSeatsCard = (props: AvailableSeatsProps) => {
         </p>
         {props.allDates &&
           props.allDates?.map((date: Date) => (
-            <>
+            <Fragment key={date.id}>
               <div className="flex items-center justify-between text-sm text-gray-400">
                 <p>{moment(date.date).format("dddd DD MMMM")}</p>
                 <p>
@@ -36,7 +36,7 @@ export const AvailableSeatsCard = (props: AvailableSeatsProps) => {
                   } rounded-full`}
                 ></div>
               </div>
-            </>
+            </Fragment>
           ))}
       </div>
     </div>
