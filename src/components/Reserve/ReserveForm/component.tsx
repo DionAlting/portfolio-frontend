@@ -103,11 +103,6 @@ export const ReserveForm = (props: ReserveFormProps) => {
                         >
                           Add a person
                         </button>
-                        <div className="flex flex-col">
-                          <span className="pl-2 mb-2 text-xs text-red-600">
-                            <ErrorMessage name={`reservationDetails`} />
-                          </span>
-                        </div>
                       </>
                     )}
 
@@ -179,7 +174,10 @@ export const ReserveForm = (props: ReserveFormProps) => {
                           <button
                             className="px-4 py-2 my-4 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed "
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={
+                              isSubmitting ||
+                              values.reservationDetails.length <= 0
+                            }
                           >
                             Submit
                           </button>
