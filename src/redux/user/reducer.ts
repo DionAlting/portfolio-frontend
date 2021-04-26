@@ -20,6 +20,7 @@ export default function authReducer(state = initialState, action: UserAction) {
       const { token, userProfile: user } = action.payload;
       localStorage.setItem("jwt", token);
       return {
+        ...state,
         isAuthenticated: true,
         ...user,
         accessToken: token,

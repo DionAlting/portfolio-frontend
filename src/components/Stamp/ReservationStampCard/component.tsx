@@ -18,7 +18,7 @@ export const ReservationStampCard = (props: StampListProps) => {
       {props.reservationStamps.length ? (
         <ul className="flex flex-col w-full divide-y divide">
           {props.reservationStamps.map((stamp) => (
-            <li className="flex flex-row">
+            <li key={stamp.id} className="flex flex-row">
               <div className="flex items-center flex-1 p-4 ">
                 <div className="flex-1 pl-1 mr-16">
                   <div className="font-medium">
