@@ -30,24 +30,32 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const ReserveForm = (props: ReserveFormProps) => {
+export const ReserveForm = ({
+  isAuthenticated,
+  firstName,
+  lastName,
+  allDates,
+  singleDate,
+  handleReservationSubmit,
+  handleDateChange,
+}: ReserveFormProps) => {
   return (
     <div className="w-full">
-      {props.isAuthenticated ? (
+      {isAuthenticated ? (
         <Formik
           initialValues={{
             dateId: "",
             reservationDetails: [
               {
-                firstName: `${props.firstName || ""}`,
-                lastName: `${props.lastName || ""} `,
+                firstName: `${firstName || ""}`,
+                lastName: `${lastName || ""} `,
               },
             ],
             comment: "",
           }}
           validationSchema={schema}
           onSubmit={(values, actions) => {
-            props.handleReservationSubmit(values);
+            handleReservationSubmit(values);
             actions.setSubmitting(false);
           }}
         >
@@ -60,18 +68,18 @@ export const ReserveForm = (props: ReserveFormProps) => {
                     <div className="flex flex-col mt-10 mb-2">
                       <div className="relative ">
                         <h5 className="p-1 text-xs font-extrabold text-gray-700 dark:text-white sm:text-sm">
-                          <span>Select a date and fill in the form</span>
+                          <span>Select a date and fill out the form</span>
                         </h5>
                         <Field
                           as="select"
                           name="dateId"
                           className="block px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-green-500 focus:border-green-500"
-                          InputProps={props.handleDateChange(values.dateId)}
+                          InputProps={handleDateChange(values.dateId)}
                         >
                           <option value="" disabled>
                             Select date
                           </option>
-                          {props.allDates.map((date) => (
+                          {allDates.map((date) => (
                             <option
                               key={date.id}
                               value={date.id}
@@ -88,7 +96,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
                         </div>
                       </div>
                     </div>
-                    {props.singleDate && (
+                    {singleDate && (
                       <>
                         <button
                           type="button"
@@ -97,9 +105,9 @@ export const ReserveForm = (props: ReserveFormProps) => {
                             arrayHelpers.push({ firstName: "", lastName: "" })
                           }
                           disabled={
-                            props.singleDate &&
+                            singleDate &&
                             values.reservationDetails.length >=
-                              props.singleDate.maxPerParty
+                              singleDate.maxPerParty
                           }
                         >
                           Add a person
@@ -107,7 +115,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
                       </>
                     )}
 
-                    {props.singleDate &&
+                    {singleDate &&
                       values.reservationDetails &&
                       values.reservationDetails.map((detail, index) => (
                         <div className="flex flex-col mb-2">
@@ -154,7 +162,7 @@ export const ReserveForm = (props: ReserveFormProps) => {
                           </div>
                         </div>
                       ))}
-                    {props.singleDate && (
+                    {singleDate && (
                       <>
                         <div className="relative md:pr-10">
                           <Field

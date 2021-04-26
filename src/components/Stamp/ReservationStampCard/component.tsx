@@ -4,7 +4,7 @@ import moment from "moment";
 import stampImage from "../../../assets/stamp.png";
 import { StampListProps } from "./types";
 
-export const ReservationStampCard = (props: StampListProps) => {
+export const ReservationStampCard = ({ reservationStamps }: StampListProps) => {
   return (
     <div className="container flex flex-col items-center justify-center w-full mx-auto mt-10 rounded-lg ">
       <div className="w-full px-4 py-5 border-b sm:px-6">
@@ -15,9 +15,9 @@ export const ReservationStampCard = (props: StampListProps) => {
           You earn a stamp each time you show up and not cancel your reservation
         </p>
       </div>
-      {props.reservationStamps.length ? (
+      {reservationStamps.length ? (
         <ul className="flex flex-col w-full divide-y divide">
-          {props.reservationStamps.map((stamp) => (
+          {reservationStamps.map((stamp) => (
             <li key={stamp.id} className="flex flex-row">
               <div className="flex items-center flex-1 p-4 ">
                 <div className="flex-1 pl-1 mr-16">

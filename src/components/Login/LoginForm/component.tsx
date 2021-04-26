@@ -8,7 +8,11 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-export const LoginForm = (props: loginProps) => {
+export const LoginForm = ({
+  handleClickShowPassword,
+  handleSubmit,
+  showPassword,
+}: loginProps) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,7 +20,7 @@ export const LoginForm = (props: loginProps) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      props.handleSubmit(values);
+      handleSubmit(values);
     },
   });
   return (
@@ -79,10 +83,10 @@ export const LoginForm = (props: loginProps) => {
             <span className="absolute inset-y-0 flex items-center pl-2 right-1">
               <button
                 type="button"
-                onClick={props.handleClickShowPassword}
+                onClick={handleClickShowPassword}
                 className="p-1 focus:outline-none focus:shadow-outline"
               >
-                {props.showPassword ? (
+                {showPassword ? (
                   <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +134,7 @@ export const LoginForm = (props: loginProps) => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              type={props.showPassword ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               className={`rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent ${
                 formik.errors.password ? "border border-red-500" : ""
               }`}

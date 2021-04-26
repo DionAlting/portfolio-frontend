@@ -21,21 +21,25 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const EditProfileForm = (props: EditProfileFormProps) => {
+export const EditProfileForm = ({
+  studyAssociations,
+  user,
+  handleUpdateProfileSubmit,
+}: EditProfileFormProps) => {
   return (
     <div>
       <Formik
         enableReinitialize
         initialValues={{
-          displayName: props.user.displayName || "",
-          email: props.user.email || "",
-          firstName: props.user.firstName || "",
-          lastName: props.user.lastName || "",
-          studyAssociationId: props.user.studyAssociation.id || "",
+          displayName: user.displayName || "",
+          email: user.email || "",
+          firstName: user.firstName || "",
+          lastName: user.lastName || "",
+          studyAssociationId: user.studyAssociation.id || "",
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          props.handleUpdateProfileSubmit(values);
+          handleUpdateProfileSubmit(values);
           actions.setSubmitting(false);
           actions.resetForm();
         }}
@@ -116,12 +120,12 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
                         name="studyAssociationId"
                         className="block w-full px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
                       >
-                        {props.studyAssociations.map((studyAssoc) => (
+                        {studyAssociations.map((studyAssoc) => (
                           <option
                             key={studyAssoc.id}
                             value={studyAssoc.id}
                             disabled={
-                              studyAssoc.id === props.user.studyAssociation.id
+                              studyAssoc.id === user.studyAssociation.id
                             }
                           >
                             {studyAssoc.name}

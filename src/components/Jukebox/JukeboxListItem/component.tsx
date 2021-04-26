@@ -5,10 +5,17 @@ import {
   TrashIcon,
 } from "@heroicons/react/outline";
 
-import { Props } from "./types";
+import { ListItemProps } from "./types";
 
-export const JukeboxListItem = (props: Props) => {
-  const { id, artist, title, voteCount } = props.songDetails;
+export const JukeboxListItem = ({
+  songDetails,
+  isAuthenticated,
+  isAdmin,
+  handleDownvoteClick,
+  handleRemoveClick,
+  handleUpvoteClick,
+}: ListItemProps) => {
+  const { id, artist, title, voteCount } = songDetails;
 
   return (
     <li
@@ -23,26 +30,23 @@ export const JukeboxListItem = (props: Props) => {
         <div className="flex flex-row flex-shrink space-x-4">
           <button
             className="flex text-right disabled:opacity-40 disabled:cursor-not-allowed"
-            disabled={!props.isAuthenticated || voteCount <= 0}
-            onClick={() => props.handleDownvoteClick(id)}
+            disabled={!isAuthenticated || voteCount <= 0}
+            onClick={() => handleDownvoteClick(id)}
           >
             <ArrowDownIcon className="w-5 h-5 text-red-400 hover:text-red-700" />
           </button>
           <div className="flex flex-shrink text-gray-600 ">{voteCount}</div>
           <button
             className="flex disabled:opacity-40 disabled:cursor-not-allowed"
-            disabled={!props.isAuthenticated}
-            onClick={() => props.handleUpvoteClick(id)}
+            disabled={!isAuthenticated}
+            onClick={() => handleUpvoteClick(id)}
           >
             <ArrowUpIcon className="w-5 h-5 text-green-400 hover:text-green-700" />
           </button>
         </div>
-        {props.isAdmin && (
+        {isAdmin && (
           <div className="flex justify-end ml-2 md:w-10">
-            <button
-              className="flex"
-              onClick={() => props.handleRemoveClick(id)}
-            >
+            <button className="flex" onClick={() => handleRemoveClick(id)}>
               <TrashIcon className="w-5 h-5 text-red-400 hover:text-red-700" />
             </button>
           </div>
