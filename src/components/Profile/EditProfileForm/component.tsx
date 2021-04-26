@@ -118,6 +118,7 @@ export const EditProfileForm = (props: EditProfileFormProps) => {
                       >
                         {props.studyAssociations.map((studyAssoc) => (
                           <option
+                            key={studyAssoc.id}
                             value={studyAssoc.id}
                             disabled={
                               studyAssoc.id === props.user.studyAssociation.id
