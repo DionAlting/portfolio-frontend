@@ -69,6 +69,8 @@ export const ReservationTable = ({
                       <td className="flex flex-row items-center justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200">
                         <button
                           onClick={() => handleDecrementCoinsClick(item.id)}
+                          disabled={item.coins <= 0}
+                          className="disabled:cursor-not-allowed"
                         >
                           <MinusIcon className="w-4 h-4 text-red-400" />
                         </button>
