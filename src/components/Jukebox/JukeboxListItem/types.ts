@@ -4,7 +4,7 @@ export type JukeboxListItemProps = {
   isAdmin: boolean;
 };
 
-export type Props = {
+export type ListItemProps = {
   songDetails: any;
   isAuthenticated: boolean;
   isAdmin: boolean;

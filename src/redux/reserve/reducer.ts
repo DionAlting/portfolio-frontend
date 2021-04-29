@@ -15,7 +15,6 @@ export default function reserveReducer(
         ...state,
         reservationDates: [...action.payload],
       };
-
     default:
       return state;
   }

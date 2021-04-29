@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { FETCH_EVENTS_SUCCESS } from "../actionTypes";
 import { EventPayload } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 const fetchEventsSuccess = (data: EventPayload) => {
   return {

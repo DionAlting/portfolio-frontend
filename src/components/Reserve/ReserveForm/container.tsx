@@ -18,8 +18,6 @@ const ReserveFormContainer = () => {
   }, []);
 
   const handleReservationSubmit = (values: ReservationValues) => {
-    //const { dateId, reservationDetails, comment } = values;
-    console.log(values);
     dispatch(Reserve.Actions.submitNewReservation(values));
   };
   return (

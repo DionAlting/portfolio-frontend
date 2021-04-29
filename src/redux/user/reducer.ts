@@ -18,15 +18,16 @@ export default function authReducer(state = initialState, action: UserAction) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       const { token, userProfile: user } = action.payload;
-      localStorage.setItem("token", token);
+      localStorage.setItem("jwt", token);
       return {
+        ...state,
         isAuthenticated: true,
         ...user,
         accessToken: token,
       };
 
     case LOG_OUT:
-      localStorage.removeItem("token");
+      localStorage.removeItem("jwt");
       return { ...initialState };
 
     case TOKEN_STILL_VALID:

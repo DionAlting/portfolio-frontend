@@ -25,7 +25,11 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const ChangePasswordForm = (props: ChangePasswordProps) => {
+export const ChangePasswordForm = ({
+  handleChangePasswordSubmit,
+  handleClickShowPassword,
+  showPassword,
+}: ChangePasswordProps) => {
   return (
     <div>
       <Formik
@@ -36,7 +40,7 @@ export const ChangePasswordForm = (props: ChangePasswordProps) => {
         }}
         validationSchema={schema}
         onSubmit={(values, actions) => {
-          props.handleChangePasswordSubmit(values);
+          handleChangePasswordSubmit(values);
           actions.setSubmitting(false);
           actions.resetForm();
         }}
@@ -53,10 +57,10 @@ export const ChangePasswordForm = (props: ChangePasswordProps) => {
                       <span className="absolute inset-y-0 flex items-center pl-2 right-1">
                         <button
                           type="button"
-                          onClick={props.handleClickShowPassword}
+                          onClick={handleClickShowPassword}
                           className="p-1 focus:outline-none focus:shadow-outline"
                         >
-                          {props.showPassword ? (
+                          {showPassword ? (
                             <EyeIcon className="w-4 h-4 text-gray-500" />
                           ) : (
                             <EyeOffIcon className="w-4 h-4 text-gray-500" />
@@ -67,7 +71,7 @@ export const ChangePasswordForm = (props: ChangePasswordProps) => {
                         className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
                         name="password"
                         placeholder="New Password"
-                        type={props.showPassword ? "text" : "password"}
+                        type={showPassword ? "text" : "password"}
                       />
                       <div className="flex flex-col">
                         <span className="pl-2 mt-2 text-xs text-red-600">
@@ -82,7 +86,7 @@ export const ChangePasswordForm = (props: ChangePasswordProps) => {
                       className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent`}
                       name="passwordConfirm"
                       placeholder="Confirm Password"
-                      type={props.showPassword ? "text" : "password"}
+                      type={showPassword ? "text" : "password"}
                     />
                     <div className="flex flex-col">
                       <span className="pl-2 mt-2 text-xs text-red-600">

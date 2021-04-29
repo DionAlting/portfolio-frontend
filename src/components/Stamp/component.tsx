@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReservationStampCard } from "./ReservationStampCard";
 import { StampProps } from "./types";
 
-export const Stamp = (props: StampProps) => {
+export const Stamp = ({ isAuthenticated }: StampProps) => {
   return (
     <div className="container flex flex-col w-full mx-auto md:w-2/3 lg:w-2/3">
       <div className="px-4 py-5 mt-4 mb-2 bg-white border-t-2 border-green-400 rounded-md shadow sm:px-6">
@@ -14,7 +14,7 @@ export const Stamp = (props: StampProps) => {
             View your stamps
           </p>
         </h2>
-        {props.isAuthenticated ? (
+        {isAuthenticated ? (
           <ReservationStampCard />
         ) : (
           <div className="mt-5">

@@ -20,7 +20,11 @@ const SignUpSchema = Yup.object().shape({
   ),
 });
 
-export const SignUpForm = (props: SignUpProps) => {
+export const SignUpForm = ({
+  handleSubmit,
+  handleClickShowPassword,
+  showPassword,
+}: SignUpProps) => {
   const formik = useFormik({
     initialValues: {
       displayName: "",
@@ -32,8 +36,7 @@ export const SignUpForm = (props: SignUpProps) => {
     },
     validationSchema: SignUpSchema,
     onSubmit: (values) => {
-      console.log(values);
-      props.handleSubmit(values);
+      handleSubmit(values);
     },
   });
 
@@ -130,10 +133,10 @@ export const SignUpForm = (props: SignUpProps) => {
             <span className="absolute inset-y-0 flex items-center pl-2 right-1">
               <button
                 type="button"
-                onClick={props.handleClickShowPassword}
+                onClick={handleClickShowPassword}
                 className="p-1 focus:outline-none focus:shadow-outline"
               >
-                {props.showPassword ? (
+                {showPassword ? (
                   <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +181,7 @@ export const SignUpForm = (props: SignUpProps) => {
             </span>
             <input
               id="password"
-              type={props.showPassword ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               name="password"
               className={`rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2  ${
                 formik.errors.password ? "border border-red-500" : ""

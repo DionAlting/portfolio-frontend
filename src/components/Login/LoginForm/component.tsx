@@ -8,7 +8,11 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-export const LoginForm = (props: loginProps) => {
+export const LoginForm = ({
+  handleClickShowPassword,
+  handleSubmit,
+  showPassword,
+}: loginProps) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,19 +20,18 @@ export const LoginForm = (props: loginProps) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log(values);
-      props.handleSubmit(values);
+      handleSubmit(values);
     },
   });
   return (
     <div className="mt-4">
       <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col mb-2">
-          <div className="flex relative ">
-            <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+          <div className="relative flex ">
+            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-white border-t border-b border-l border-gray-300 shadow-sm rounded-l-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
+                className="w-4 h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -53,18 +56,18 @@ export const LoginForm = (props: loginProps) => {
               placeholder="Your email"
             />
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             {formik.touched.email && formik.errors.email ? (
-              <p className="text-red-600 text-xs mt-2">{formik.errors.email}</p>
+              <p className="mt-2 text-xs text-red-600">{formik.errors.email}</p>
             ) : null}
           </div>
         </div>
         <div className="flex flex-col mb-6">
-          <div className="flex relative ">
-            <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+          <div className="relative flex ">
+            <span className="inline-flex items-center px-3 text-sm text-gray-500 bg-white border-t border-b border-l border-gray-300 shadow-sm rounded-l-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
+                className="w-4 h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -77,17 +80,17 @@ export const LoginForm = (props: loginProps) => {
                 />
               </svg>
             </span>
-            <span className="absolute inset-y-0 right-1 flex items-center pl-2">
+            <span className="absolute inset-y-0 flex items-center pl-2 right-1">
               <button
                 type="button"
-                onClick={props.handleClickShowPassword}
+                onClick={handleClickShowPassword}
                 className="p-1 focus:outline-none focus:shadow-outline"
               >
-                {props.showPassword ? (
+                {showPassword ? (
                   <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-gray-500"
+                      className="w-4 h-4 text-gray-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -110,7 +113,7 @@ export const LoginForm = (props: loginProps) => {
                   <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-gray-500"
+                      className="w-4 h-4 text-gray-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -131,16 +134,16 @@ export const LoginForm = (props: loginProps) => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              type={props.showPassword ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               className={`rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent ${
                 formik.errors.password ? "border border-red-500" : ""
               }`}
               placeholder="Your password"
             />
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             {formik.touched.password && formik.errors.password ? (
-              <p className="text-red-600 text-xs mt-2">
+              <p className="mt-2 text-xs text-red-600">
                 {formik.errors.password}
               </p>
             ) : null}
@@ -149,7 +152,7 @@ export const LoginForm = (props: loginProps) => {
         <div className="flex w-full">
           <button
             type="submit"
-            className="py-2 px-4  bg-green-400 hover:bg-green-600 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+            className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
           >
             Login
           </button>
@@ -160,7 +163,7 @@ export const LoginForm = (props: loginProps) => {
           Don't have an account?
           <Link
             to="/signup"
-            className="text-sm text-green-500 underline hover:text-green-600 ml-1"
+            className="ml-1 text-sm text-green-500 underline hover:text-green-600"
           >
             Sign up
           </Link>

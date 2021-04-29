@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import {
   DELETE_SONG_SUCCESS,
@@ -8,10 +9,9 @@ import {
   UPVOTE_SONG_SUCCESS,
 } from "../actionTypes";
 import { ReduxState } from "../store";
-import { requestedSongs } from "./selectors";
 import { SongRequestValues, SongsPayload } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 export const songsFetchedSuccess = (data: SongsPayload) => ({
   type: FETCH_SONGS_SUCCESS,
@@ -43,7 +43,12 @@ export const fetchSongRequests = () => async (dispatch: Dispatch) => {
     const dateResponse = await axios.get(`${API_URL}/jukebox/requests`);
     dispatch(songsFetchedSuccess(dateResponse.data));
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
 
@@ -53,7 +58,7 @@ export const upvoteSongRequest = (songId: string) => async (
 ) => {
   try {
     const { accessToken } = getState().user;
-    const upvoteResponse = await axios.put(
+    await axios.put(
       `${API_URL}/jukebox/${songId}/upvote`,
       {
         songId,
@@ -64,7 +69,12 @@ export const upvoteSongRequest = (songId: string) => async (
     );
     dispatch(upvoteSongSuccess(songId));
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
 
@@ -74,7 +84,7 @@ export const downvoteSongRequest = (songId: string) => async (
 ) => {
   try {
     const { accessToken } = getState().user;
-    const downvoteResponse = await axios.put(
+    await axios.put(
       `${API_URL}/jukebox/${songId}/downvote`,
       {
         songId,
@@ -85,7 +95,12 @@ export const downvoteSongRequest = (songId: string) => async (
     );
     dispatch(downSongSuccess(songId));
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
 
@@ -106,10 +121,15 @@ export const submitSongRequest = (values: SongRequestValues) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(requestResponse);
     dispatch(submitRequestSuccess(requestResponse.data.newSongRequest));
+    toast.success("Song request created! Happy voting :)");
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
 
@@ -126,7 +146,13 @@ export const deleteSongRequest = (songId: string) => async (
       }
     );
     dispatch(deleteSongSuccess(songId));
+    toast.success(requestResponse.data.message);
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+      console.log(error);
+    }
   }
 };
