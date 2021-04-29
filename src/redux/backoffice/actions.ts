@@ -194,7 +194,6 @@ export const newDate = (values: DateSubmitValues) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(response);
     toast.success(response.data.message);
     dispatch(fetchAllReservations());
   } catch (error) {
