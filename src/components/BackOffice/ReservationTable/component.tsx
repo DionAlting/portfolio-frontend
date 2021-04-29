@@ -76,7 +76,7 @@ export const ReservationTable = ({
                             )
                           }
                           disabled={reservation.coins <= 0}
-                          className="disabled:cursor-not-allowed"
+                          className="disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                         >
                           <MinusIcon className="w-4 h-4 text-red-400" />
                         </button>
@@ -91,6 +91,7 @@ export const ReservationTable = ({
                               reservation.id
                             )
                           }
+                          className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                         >
                           <PlusIcon className="w-4 h-4 text-green-400" />
                         </button>

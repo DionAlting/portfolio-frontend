@@ -29,7 +29,7 @@ export const JukeboxListItem = ({
         </div>
         <div className="flex flex-row flex-shrink space-x-4">
           <button
-            className="flex text-right disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex text-right disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             disabled={!isAuthenticated || voteCount <= 0}
             onClick={() => handleDownvoteClick(id)}
           >
@@ -37,7 +37,7 @@ export const JukeboxListItem = ({
           </button>
           <div className="flex flex-shrink text-gray-600 ">{voteCount}</div>
           <button
-            className="flex disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             disabled={!isAuthenticated}
             onClick={() => handleUpvoteClick(id)}
           >
@@ -46,8 +46,11 @@ export const JukeboxListItem = ({
         </div>
         {isAdmin && (
           <div className="flex justify-end ml-2 md:w-10">
-            <button className="flex" onClick={() => handleRemoveClick(id)}>
-              <TrashIcon className="w-5 h-5 text-red-400 hover:text-red-700" />
+            <button
+              className="flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              onClick={() => handleRemoveClick(id)}
+            >
+              <TrashIcon className="w-5 h-5 text-red-400 hover:text-red-700 " />
             </button>
           </div>
         )}
