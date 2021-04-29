@@ -55,6 +55,7 @@ export const login = (email: string, password: string) => async (
       email,
       password,
     });
+
     const { token } = response.data;
 
     const userProfile = await getUserProfile(token);
