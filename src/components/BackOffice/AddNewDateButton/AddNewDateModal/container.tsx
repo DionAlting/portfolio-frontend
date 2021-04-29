@@ -1,9 +1,19 @@
 import React from "react";
-import { AddNewDateProps } from "../types";
+import { ModalProps } from "../types";
 import { AddNewDateModal } from "./component";
 
-const AddNewDateModalContainer = ({ isOpen, setIsOpen }: AddNewDateProps) => {
-  return <AddNewDateModal isOpen={isOpen} setIsOpen={setIsOpen} />;
+const AddNewDateModalContainer = ({
+  isOpen,
+  setIsOpen,
+  handleNewDateSubmit,
+}: ModalProps) => {
+  return (
+    <AddNewDateModal
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      handleNewDateSubmit={handleNewDateSubmit}
+    />
+  );
 };
 
 export default AddNewDateModalContainer;

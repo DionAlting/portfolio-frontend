@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Dialog, Switch } from "@headlessui/react";
-import { AddNewDateProps } from "../types";
+import { ModalProps } from "../types";
 import { Formik, Form, Field, getIn, FieldProps } from "formik";
 
 import * as Yup from "yup";
@@ -22,7 +22,11 @@ const ErrorMessage = ({ name }: any) => (
   </Field>
 );
 
-export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
+export const AddNewDateModal = ({
+  isOpen,
+  setIsOpen,
+  handleNewDateSubmit,
+}: ModalProps) => {
   let completeButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -34,7 +38,7 @@ export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
       className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto"
     >
       <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-      <div className="z-10 flex flex-col px-4 py-8 text-center text-gray-600 bg-white rounded-lg shadow-xl w-96">
+      <div className="z-10 flex flex-col px-4 py-8 text-center text-gray-600 bg-white border-t-2 border-green-400 rounded-lg shadow-xl w-96 ">
         <Dialog.Title className="mb-4 text-2xl text-gray-600">
           Select a date and add a stamp
         </Dialog.Title>
@@ -48,7 +52,7 @@ export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
           }}
           validationSchema={schema}
           onSubmit={(values, actions) => {
-            console.log({
+            handleNewDateSubmit({
               ...values,
               date: moment(values.date).toISOString(),
             });
@@ -110,8 +114,8 @@ export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
                       setFieldValue("isStampable", !values.isStampable)
                     }
                     className={`${
-                      values.isStampable ? "bg-green-600" : "bg-gray-200"
-                    } relative inline-flex items-center h-6 rounded-full w-11`}
+                      values.isStampable ? "bg-green-400" : "bg-gray-200"
+                    } relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
                   >
                     <span className="sr-only">Enable isStampable</span>
                     <span
@@ -122,7 +126,7 @@ export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
                   </Switch>
                 </div>
               </div>
-              <div className="mt-4">
+              <div className="mt-4 text-right">
                 <button
                   className="inline-flex justify-center w-full px-4 py-2 m-4 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => setIsOpen(false)}
@@ -131,7 +135,7 @@ export const AddNewDateModal = ({ isOpen, setIsOpen }: AddNewDateProps) => {
                   Cancel
                 </button>
                 <button
-                  className="inline-flex justify-center w-full px-4 py-2 m-4 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="px-4 py-2 my-4 text-base font-medium text-center text-white transition duration-200 ease-in bg-green-400 rounded-lg shadow-md hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   ref={completeButtonRef}
                   type="submit"
                   disabled={isSubmitting}

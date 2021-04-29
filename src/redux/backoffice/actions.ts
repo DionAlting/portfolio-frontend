@@ -9,7 +9,7 @@ import {
   CANCEL_GUEST_SUCCESS,
 } from "../actionTypes";
 import { ReduxState } from "../store";
-import { ReservationDatesPayload } from "./types";
+import { DateSubmitValues, ReservationDatesPayload } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -169,6 +169,34 @@ export const decrementCoins = (dateId: string, reservationId: string) => async (
       }
     );
     dispatch(decrementSuccess(dateId, reservationId));
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log(error);
+  }
+};
+
+export const newDate = (values: DateSubmitValues) => async (
+  dispatch: Dispatch<any>,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    const response = await axios.post(
+      `${API_URL}/backoffice/dates`,
+      {
+        values,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    console.log(response);
+    toast.success(response.data.message);
+    dispatch(fetchAllReservations());
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);

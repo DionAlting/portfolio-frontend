@@ -1,8 +1,12 @@
 import React from "react";
 import { AddNewDateModal } from "./AddNewDateModal/component";
-import { AddNewDateProps } from "./types";
+import { ModalProps } from "./types";
 
-export const AddNewDateButton = ({ setIsOpen, isOpen }: AddNewDateProps) => {
+export const AddNewDateButton = ({
+  setIsOpen,
+  isOpen,
+  handleNewDateSubmit,
+}: ModalProps) => {
   return (
     <div>
       <button
@@ -11,7 +15,11 @@ export const AddNewDateButton = ({ setIsOpen, isOpen }: AddNewDateProps) => {
       >
         New Date
       </button>
-      <AddNewDateModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddNewDateModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleNewDateSubmit={handleNewDateSubmit}
+      />
     </div>
   );
 };

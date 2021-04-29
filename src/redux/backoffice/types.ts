@@ -14,6 +14,13 @@ export type ReservationDatesPayload = {
   reservationDates: ReservationDate[];
 };
 
+export type DateSubmitValues = {
+  date: string;
+  maxSeats: number;
+  maxPerParty: number;
+  isStampable: boolean;
+};
+
 export type ReservationDate = {
   id: string;
   date: string;
