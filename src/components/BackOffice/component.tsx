@@ -1,4 +1,5 @@
 import React from "react";
+import { AddNewDateButton } from "./AddNewDateButton/";
 import { ReservationTable } from "./ReservationTable/";
 
 export const BackOffice = () => {
@@ -14,7 +15,8 @@ export const BackOffice = () => {
       </div>
       <div className="grid grid-cols-1 gap-6 px-4 py-5 md:grid-cols-1 xl:grid-cols-1">
         <div className="px-4 py-2 bg-white rounded-lg shadow">
-          <span className="block text-2xl">todo: New date form</span>
+          <span className="block mb-4 text-2xl">Add a new date</span>
+          <AddNewDateButton />
         </div>
         <div className="px-4 py-2 bg-white rounded-lg shadow">
           <span className="block text-2xl">Reservations</span>
