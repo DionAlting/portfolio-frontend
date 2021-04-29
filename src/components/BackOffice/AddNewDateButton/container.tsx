@@ -9,7 +9,6 @@ const AddNewDateButtonContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNewDateSubmit = (values: newDateValues) => {
-    console.log(values);
     dispatch(BackOffice.Actions.newDate(values));
     setIsOpen(false);
   };
