@@ -15,7 +15,7 @@ export const ReservationTable = ({
       {reservations.map((date) => (
         <div className="py-4 mx-auto overflow-x-auto " key={date.id}>
           <h2 className="px-4 py-2 text-xl leading-tight text-white bg-green-400 rounded-t-lg">
-            {moment(date.date).format("dddd do MMMM YYYY")}
+            {moment(date.date).format("dddd DD MMMM")}
           </h2>
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
             {date.reservations.length > 0 ? (
