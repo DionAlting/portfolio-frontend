@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
+import { Dispatch } from "redux";
 import {
   GET_STAMPS_SUCCESS,
   LOGIN_SUCCESS,
@@ -10,7 +10,7 @@ import {
 import { ReduxState } from "../store";
 import { Stamp } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 const saveUserData = (token: string, userProfile: any) => {
   return {
@@ -62,14 +62,13 @@ export const login = (email: string, password: string) => async (
 
     localStorage.setItem("jwt", token);
     dispatch(saveUserData(token, userProfile));
-    dispatch(getUserStamps());
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
     } else {
       toast.error("Something unexpected happened");
     }
-    console.log("error", error);
+    console.log(error);
   }
 };
 
@@ -100,15 +99,16 @@ export const signUp = (
     } else {
       toast.error("Something unexpected happened");
     }
-    console.log("error", error);
+    console.log(error);
   }
 };
 
-export const bootstrapLogin = () => async (dispatch: Dispatch) => {
+export const bootstrapLogin = () => async (dispatch: Dispatch<any>) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
     const userProfile = await getUserProfile(jwt);
     dispatch(saveUserData(jwt, userProfile));
+    dispatch(getUserStamps());
   } else {
     console.log("no token stored in localstorage");
   }
@@ -131,13 +131,14 @@ export const updateProfile = (values: any) => async (
     );
     const data = updateResponse.data.cleanUpdatedUser;
     dispatch(updateProfileSuccess(data));
+    toast.success(updateResponse.data.message);
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
     } else {
       toast.error("Something unexpected happened");
     }
-    console.log("error", error);
+    console.log(error);
   }
 };
 
@@ -156,6 +157,7 @@ export const changePassword = (values: any) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
+    console.log(changePasswordResponse);
     toast.success(changePasswordResponse.data.message);
   } catch (error) {
     if (error.response) {
@@ -163,7 +165,7 @@ export const changePassword = (values: any) => async (
     } else {
       toast.error("Something unexpected happened");
     }
-    console.log("error", error);
+    console.log(error);
   }
 };
 
@@ -183,6 +185,6 @@ export const getUserStamps = () => async (
     } else {
       toast.error("Something unexpected happened");
     }
-    console.log("error", error);
+    console.log(error);
   }
 };

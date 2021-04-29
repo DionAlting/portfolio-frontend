@@ -7,7 +7,7 @@ import { SignUp } from "./component";
 const SignUpContainer = () => {
   const isAuthenticated = useSelector(User.Selectors.isAuthenticated);
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return <Redirect to="/" />;
   }
 

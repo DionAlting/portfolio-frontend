@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { FETCH_STUDY_ASSOC_SUCCESS } from "../actionTypes";
 import { StudyAssocPayload } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 const fetchStudyAssocSuccess = (data: StudyAssocPayload) => {
   return {

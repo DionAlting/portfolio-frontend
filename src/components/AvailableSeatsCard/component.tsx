@@ -1,17 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { AvailableSeatsProps, Date } from "./types";
 import moment from "moment";
 
-export const AvailableSeatsCard = (props: AvailableSeatsProps) => {
+export const AvailableSeatsCard = ({ allDates }: AvailableSeatsProps) => {
   return (
     <div className="p-4 overflow-hidden text-gray-700 bg-white border-t-2 border-green-400 shadow-lg rounded-xl dark:bg-gray-800 dark:text-gray-100">
       <div className="w-full">
         <p className="mb-4 text-2xl font-light text-gray-700 dark:text-white">
           Available Seats
         </p>
-        {props.allDates &&
-          props.allDates?.map((date: Date) => (
-            <>
+        {allDates &&
+          allDates?.map((date: Date) => (
+            <Fragment key={date.id}>
               <div className="flex items-center justify-between text-sm text-gray-400">
                 <p>{moment(date.date).format("dddd DD MMMM")}</p>
                 <p>
@@ -36,7 +36,7 @@ export const AvailableSeatsCard = (props: AvailableSeatsProps) => {
                   } rounded-full`}
                 ></div>
               </div>
-            </>
+            </Fragment>
           ))}
       </div>
     </div>

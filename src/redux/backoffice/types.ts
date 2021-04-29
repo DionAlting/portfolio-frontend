@@ -1,11 +1,24 @@
-import { FETCH_RESERVATION_BY_DATE_SUCCESS } from "../actionTypes";
+import {
+  CHECK_OUT_GUEST_SUCCESS,
+  FETCH_RESERVATION_BY_DATE_SUCCESS,
+  INCREMENT_SUCCESS,
+  DECREMENT_SUCCESS,
+  CANCEL_GUEST_SUCCESS,
+} from "../actionTypes";
 
 export type BackOfficeState = {
-  reservationsByDate: ReservationDatesPayload[];
+  reservationsByDate: ReservationDate[];
 };
 
 export type ReservationDatesPayload = {
   reservationDates: ReservationDate[];
+};
+
+export type DateSubmitValues = {
+  date: string;
+  maxSeats: number;
+  maxPerParty: number;
+  isStampable: boolean;
 };
 
 export type ReservationDate = {
@@ -31,7 +44,24 @@ export type Reservations = {
   isCheckedOut: boolean;
 };
 
-export type BackOfficeAction = {
-  type: typeof FETCH_RESERVATION_BY_DATE_SUCCESS;
-  payload: ReservationDatesPayload;
-};
+export type BackOfficeAction =
+  | {
+      type: typeof FETCH_RESERVATION_BY_DATE_SUCCESS;
+      payload: ReservationDatesPayload;
+    }
+  | {
+      type: typeof CHECK_OUT_GUEST_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof INCREMENT_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof DECREMENT_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof CANCEL_GUEST_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    };
