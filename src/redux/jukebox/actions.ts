@@ -122,6 +122,7 @@ export const submitSongRequest = (values: SongRequestValues) => async (
       }
     );
     dispatch(submitRequestSuccess(requestResponse.data.newSongRequest));
+    toast.success("Song request created! Happy voting :)");
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
