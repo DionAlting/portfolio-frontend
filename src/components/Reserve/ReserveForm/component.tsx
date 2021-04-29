@@ -59,7 +59,7 @@ export const ReserveForm = ({
             actions.setSubmitting(false);
           }}
         >
-          {({ values, errors, isSubmitting }) => (
+          {({ values, isSubmitting, handleChange }) => (
             <Form>
               <FieldArray
                 name="reservationDetails"
@@ -74,7 +74,11 @@ export const ReserveForm = ({
                           as="select"
                           name="dateId"
                           className="block px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-green-500 focus:border-green-500"
-                          InputProps={handleDateChange(values.dateId)}
+                          onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                            handleChange(e);
+                            handleDateChange(e.currentTarget?.value);
+                          }}
+                          value={values.dateId}
                         >
                           <option value="" disabled>
                             Select date
@@ -118,7 +122,7 @@ export const ReserveForm = ({
                     {singleDate &&
                       values.reservationDetails &&
                       values.reservationDetails.map((detail, index) => (
-                        <div className="flex flex-col mb-2">
+                        <div className="flex flex-col mb-2" key={index}>
                           <div className="flex gap-4 mb-2">
                             <div className="relative ">
                               <Field
