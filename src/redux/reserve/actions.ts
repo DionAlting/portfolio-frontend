@@ -19,7 +19,7 @@ export const fetchDates = () => async (dispatch: Dispatch) => {
 };
 
 export const submitNewReservation = (values: any) => async (
-  dispatch: Dispatch,
+  dispatch: Dispatch<any>,
   getState: () => ReduxState
 ) => {
   try {
@@ -33,6 +33,7 @@ export const submitNewReservation = (values: any) => async (
       }
     );
     toast.success(response.data.message);
+    dispatch(fetchDates());
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
