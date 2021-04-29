@@ -8,6 +8,7 @@ export const ReservationTable = ({
   handleCheckoutClick,
   handleIncrementCoinsClick,
   handleDecrementCoinsClick,
+  handleCancelReservationClick,
 }: ReservationTableProps) => {
   return (
     <div className="w-full">
@@ -54,39 +55,56 @@ export const ReservationTable = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {date.reservations.map((item) => (
-                    <tr key={item.id}>
+                  {date.reservations.map((reservation) => (
+                    <tr key={reservation.id}>
                       <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {item.firstName} {item.lastName}
+                          {reservation.firstName} {reservation.lastName}
                         </p>
                       </td>
                       <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {item.comment}
+                          {reservation.comment}
                         </p>
                       </td>
-                      <td className="flex flex-row items-center justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200">
+                      <td className="flex flex-row justify-center px-5 py-8 space-x-2 text-sm text-center bg-white border-b border-gray-200 reservations-center">
                         <button
-                          onClick={() => handleDecrementCoinsClick(item.id)}
-                          disabled={item.coins <= 0}
+                          onClick={() =>
+                            handleDecrementCoinsClick(
+                              reservation.dateId,
+                              reservation.id
+                            )
+                          }
+                          disabled={reservation.coins <= 0}
                           className="disabled:cursor-not-allowed"
                         >
                           <MinusIcon className="w-4 h-4 text-red-400" />
                         </button>
 
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {item.coins}
+                          {reservation.coins}
                         </p>
                         <button
-                          onClick={() => handleIncrementCoinsClick(item.id)}
+                          onClick={() =>
+                            handleIncrementCoinsClick(
+                              reservation.dateId,
+                              reservation.id
+                            )
+                          }
                         >
                           <PlusIcon className="w-4 h-4 text-green-400" />
                         </button>
                       </td>
                       <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
                         <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900 hover:text-red-600">
-                          <button>
+                          <button
+                            onClick={() =>
+                              handleCancelReservationClick(
+                                reservation.dateId,
+                                reservation.id
+                              )
+                            }
+                          >
                             <span
                               aria-hidden="true"
                               className="absolute inset-0 bg-red-200 rounded-full opacity-50"
@@ -97,7 +115,14 @@ export const ReservationTable = ({
                       </td>
                       <td className="px-5 py-5 text-sm text-center bg-white border-b border-gray-200">
                         <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-900 hover:text-gray-500">
-                          <button onClick={() => handleCheckoutClick(item.id)}>
+                          <button
+                            onClick={() =>
+                              handleCheckoutClick(
+                                reservation.dateId,
+                                reservation.id
+                              )
+                            }
+                          >
                             <span
                               aria-hidden="true"
                               className="absolute inset-0 bg-gray-400 rounded-full opacity-50"

@@ -3,7 +3,10 @@ import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import {
   CHECK_OUT_GUEST_SUCCESS,
+  DECREMENT_SUCCESS,
   FETCH_RESERVATION_BY_DATE_SUCCESS,
+  INCREMENT_SUCCESS,
+  CANCEL_GUEST_SUCCESS,
 } from "../actionTypes";
 import { ReduxState } from "../store";
 import { ReservationDatesPayload } from "./types";
@@ -17,10 +20,33 @@ const fetchReservationsSuccess = (data: ReservationDatesPayload) => {
   };
 };
 
-const checkOutGuestSuccess = (reservationId: string) => {
+const checkOutGuestSuccess = (dateId: string, reservationId: string) => {
   return {
     type: CHECK_OUT_GUEST_SUCCESS,
-    payload: reservationId,
+    payload: { dateId, reservationId },
+  };
+};
+
+const cancelGuestReservationSuccess = (
+  dateId: string,
+  reservationId: string
+) => {
+  return {
+    type: CANCEL_GUEST_SUCCESS,
+    payload: { dateId, reservationId },
+  };
+};
+
+const incrementSuccess = (dateId: string, reservationId: string) => {
+  return {
+    type: INCREMENT_SUCCESS,
+    payload: { dateId, reservationId },
+  };
+};
+const decrementSuccess = (dateId: string, reservationId: string) => {
+  return {
+    type: DECREMENT_SUCCESS,
+    payload: { dateId, reservationId },
   };
 };
 
@@ -47,7 +73,7 @@ export const fetchAllReservations = () => async (
   }
 };
 
-export const checkOutGuest = (reservationId: string) => async (
+export const checkOutGuest = (dateId: string, reservationId: string) => async (
   dispatch: Dispatch,
   getState: () => ReduxState
 ) => {
@@ -62,7 +88,7 @@ export const checkOutGuest = (reservationId: string) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    dispatch(checkOutGuestSuccess(reservationId));
+    dispatch(checkOutGuestSuccess(dateId, reservationId));
     toast.success(checkOutResponse.data.message);
   } catch (error) {
     if (error.response) {
@@ -74,14 +100,14 @@ export const checkOutGuest = (reservationId: string) => async (
   }
 };
 
-export const incrementCoins = (reservationId: string) => async (
-  dispatch: Dispatch,
-  getState: () => ReduxState
-) => {
+export const cancelReservation = (
+  dateId: string,
+  reservationId: string
+) => async (dispatch: Dispatch, getState: () => ReduxState) => {
   try {
     const { accessToken } = getState().user;
-    const incrementResponse = await axios.put(
-      `${API_URL}/backoffice/${reservationId}/increment`,
+    const checkOutResponse = await axios.put(
+      `${API_URL}/backoffice/${reservationId}/cancel`,
       {
         reservationId,
       },
@@ -89,7 +115,8 @@ export const incrementCoins = (reservationId: string) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(incrementResponse);
+    dispatch(cancelGuestReservationSuccess(dateId, reservationId));
+    toast.success(checkOutResponse.data.message);
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);
@@ -100,13 +127,39 @@ export const incrementCoins = (reservationId: string) => async (
   }
 };
 
-export const decrementCoins = (reservationId: string) => async (
+export const incrementCoins = (dateId: string, reservationId: string) => async (
   dispatch: Dispatch,
   getState: () => ReduxState
 ) => {
   try {
     const { accessToken } = getState().user;
-    const decrementResponse = await axios.put(
+    await axios.put(
+      `${API_URL}/backoffice/${reservationId}/increment`,
+      {
+        reservationId,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    dispatch(incrementSuccess(dateId, reservationId));
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something unexpected happened");
+    }
+    console.log(error);
+  }
+};
+
+export const decrementCoins = (dateId: string, reservationId: string) => async (
+  dispatch: Dispatch,
+  getState: () => ReduxState
+) => {
+  try {
+    const { accessToken } = getState().user;
+    await axios.put(
       `${API_URL}/backoffice/${reservationId}/decrement`,
       {
         reservationId,
@@ -115,8 +168,7 @@ export const decrementCoins = (reservationId: string) => async (
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-
-    console.log(decrementResponse);
+    dispatch(decrementSuccess(dateId, reservationId));
   } catch (error) {
     if (error.response) {
       toast.error(error.response.data.message);

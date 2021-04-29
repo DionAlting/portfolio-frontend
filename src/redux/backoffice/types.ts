@@ -1,6 +1,9 @@
 import {
   CHECK_OUT_GUEST_SUCCESS,
   FETCH_RESERVATION_BY_DATE_SUCCESS,
+  INCREMENT_SUCCESS,
+  DECREMENT_SUCCESS,
+  CANCEL_GUEST_SUCCESS,
 } from "../actionTypes";
 
 export type BackOfficeState = {
@@ -41,5 +44,17 @@ export type BackOfficeAction =
     }
   | {
       type: typeof CHECK_OUT_GUEST_SUCCESS;
-      payload: { reservationId: string };
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof INCREMENT_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof DECREMENT_SUCCESS;
+      payload: { dateId: string; reservationId: string };
+    }
+  | {
+      type: typeof CANCEL_GUEST_SUCCESS;
+      payload: { dateId: string; reservationId: string };
     };

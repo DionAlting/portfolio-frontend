@@ -9,19 +9,23 @@ const ReservationTableContainer = () => {
 
   const reservations = useReservationsByDate();
 
-  const handleCheckoutClick = (reservationId: string) => {
-    console.log(reservationId);
-    dispatch(BackOffice.Actions.checkOutGuest(reservationId));
+  const handleCheckoutClick = (dateId: string, reservationId: string) => {
+    dispatch(BackOffice.Actions.checkOutGuest(dateId, reservationId));
   };
 
-  const handleIncrementCoinsClick = (reservationId: string) => {
-    console.log(reservationId);
-    dispatch(BackOffice.Actions.incrementCoins(reservationId));
+  const handleIncrementCoinsClick = (dateId: string, reservationId: string) => {
+    dispatch(BackOffice.Actions.incrementCoins(dateId, reservationId));
   };
 
-  const handleDecrementCoinsClick = (reservationId: string) => {
-    console.log(reservationId);
-    dispatch(BackOffice.Actions.decrementCoins(reservationId));
+  const handleDecrementCoinsClick = (dateId: string, reservationId: string) => {
+    dispatch(BackOffice.Actions.decrementCoins(dateId, reservationId));
+  };
+
+  const handleCancelReservationClick = (
+    dateId: string,
+    reservationId: string
+  ) => {
+    dispatch(BackOffice.Actions.cancelReservation(dateId, reservationId));
   };
 
   return (
@@ -30,6 +34,7 @@ const ReservationTableContainer = () => {
       handleCheckoutClick={handleCheckoutClick}
       handleIncrementCoinsClick={handleIncrementCoinsClick}
       handleDecrementCoinsClick={handleDecrementCoinsClick}
+      handleCancelReservationClick={handleCancelReservationClick}
     />
   );
 };
