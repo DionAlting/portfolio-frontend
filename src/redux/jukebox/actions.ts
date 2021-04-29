@@ -11,7 +11,7 @@ import {
 import { ReduxState } from "../store";
 import { SongRequestValues, SongsPayload } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 export const songsFetchedSuccess = (data: SongsPayload) => ({
   type: FETCH_SONGS_SUCCESS,

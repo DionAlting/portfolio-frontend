@@ -10,8 +10,7 @@ import {
 } from "../actionTypes";
 import { ReduxState } from "../store";
 import { DateSubmitValues, ReservationDatesPayload } from "./types";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 const fetchReservationsSuccess = (data: ReservationDatesPayload) => {
   return {

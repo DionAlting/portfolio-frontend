@@ -10,7 +10,7 @@ import {
 import { ReduxState } from "../store";
 import { Stamp } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from "../../util/config";
 
 const saveUserData = (token: string, userProfile: any) => {
   return {
