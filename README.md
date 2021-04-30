@@ -12,9 +12,9 @@ Bar staff have a clean overview of the upcoming reservations, keep track on the 
 
 - [Screenshots](#screenshots)
 - [Features](#features)
-- [Tech](#tech)
-- [Lessons](#lessons)
-- [Roadmap](#roadmap)
+- [Tech](#tech-stack)
+- [Lessons](#lessons-learned)
+- [Roadmap](#upcoming-features-/-roadmap)
 - [Links](#links)
 - [Install](#install)
 
