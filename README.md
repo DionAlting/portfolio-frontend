@@ -1,46 +1,95 @@
-# Getting Started with Create React App
+## Haerlems Studenten Gildt online reservation platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is custom made for a local student bar in Haarlem. They needed an online reservation platform during the COVID-19 pandemic to keep track of their guests.
 
-## Available Scripts
+With this platform guests can register, check how many seats are available and reserve a table. When they don't cancel their reservation they automatically receive a loyalty stamp, with those stamps they can claim a free drink when they reach a certain amount of stamps. As a guest you can also request songs in the Jukebox and vote on requests made by other guests.
 
-In the project directory, you can run:
+Bar staff have a clean overview of the upcoming reservations, keep track on the amount of coins\* guests have spent and check out guests when they have paid.
 
-### `npm start`
+\*_The bar has a coin based payment system but can't hand out physical coins during the pandemic_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Tech](#tech-stack)
+- [Lessons](#lessons-learned)
+- [Roadmap](#upcoming-features-/-roadmap)
+- [Links](#links)
+- [Install](#install)
 
-### `npm test`
+## Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![App Screenshot](./header.png)
 
-### `npm run build`
+- [More Screenshots](https://drive.google.com/drive/folders/1HsT6ivmhclyFDBUOT6jJvPuzPAPt0Hex?usp=sharing)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Login / Sign up
+- Reserve tables
+- Check upcoming events
+- Request songs "Jukebox"
+- Stamp cards
+- Edit user profile
+- Protected routes for staff
+- Staff page with upcoming reservations
+- Mobile responsive
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tech Stack
 
-### `npm run eject`
+**Client:** React, TypeScript, Redux, Formik + Yup, Headless UI, Tailwind CSS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Server:** Node, Express, JWT, Sequelize, PostgreSQL, Joi
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Lessons Learned
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+What I learned during this project:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Practice building a MVP in 9 days
+- Abstracting code to make small reuseable components in React
+- Working with TypeScript
+- Custom hooks
+- Creating an UI with Tailwind CSS + Headless UI
 
-## Learn More
+## Upcoming features / Roadmap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Upload user avatar
+- Ability for guests to cancel their own reservation
+- Create new event page for staff and study associations.
+- More staff functionalities
+- Abstract code into smaller components
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Links
+
+- [Project board](https://github.com/DionAlting/portfolio-frontend/projects/1)
+- [Wireframe](https://drive.google.com/file/d/1OejX_buUxH4yMAuVMA9yqSkchwT6GkK6/view?usp=sharing)
+- [Database diagram](https://dbdiagram.io/d/6049e497fcdcb6230b23a30b)
+- [Backend repo](https://github.com/DionAlting/portfolio-backend)
+
+## Install
+
+Clone the project
+
+```bash
+  HTTPS => git clone https://github.com/DionAlting/portfolio-frontend.git
+  SSH   => git clone git@github.com:DionAlting/portfolio-frontend.git
+```
+
+Go to the project directory
+
+```bash
+  cd portfolio-frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
